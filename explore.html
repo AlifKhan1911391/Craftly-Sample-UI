@@ -48,10 +48,11 @@
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .modal-close { position: absolute; top: 16px; right: 20px; background: rgba(0,0,0,0.12); border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: 0.2s; }
         .modal-close:hover { background: #000; color: #fff; }
-        .portfolio-cover { height: 160px; background: linear-gradient(135deg, #000 0%, #333 100%); position: relative; }
+        .portfolio-cover { height: 160px; background: linear-gradient(135deg, #000 0%, #333 100%); position: relative; overflow: hidden; }
+        .portfolio-cover img.cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
         .portfolio-cover-pattern { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 22px 22px; }
         .portfolio-body { padding: 0 30px 30px; }
-        .portfolio-avatar-wrap { margin-top: -50px; margin-bottom: 14px; }
+        .portfolio-avatar-wrap { margin-top: -50px; margin-bottom: 14px; position: relative; z-index: 2; }
         .portfolio-avatar { width: 100px; height: 100px; border-radius: 50%; border: 4px solid #fff; object-fit: cover; display: block; }
         .portfolio-name { font-size: 26px; font-weight: 800; margin-bottom: 2px; }
         .portfolio-handle { color: #888; font-size: 14px; margin-bottom: 10px; }
@@ -227,7 +228,7 @@ function openPortfolio(id) {
     var skills = (dev.skills||[]).map(function(s){ return '<span class="portfolio-skill">'+s+'</span>'; }).join('');
     document.getElementById('portfolioContent').innerHTML =
         '<button class="modal-close" onclick="closePortfolio()"><i class="fa-solid fa-xmark"></i></button>'
-        + '<div class="portfolio-cover"><div class="portfolio-cover-pattern"></div></div>'
+        + '<div class="portfolio-cover"><img class="cover-img" src="' + (dev.cover || 'https://placehold.co/720x160/111111/333333?text=+') + '" onerror="this.onerror=null;this.src=\'https://placehold.co/720x160/111111/333333?text=+\'" alt="cover"><div class="portfolio-cover-pattern"></div></div>'
         + '<div class="portfolio-body">'
         + '<div class="portfolio-avatar-wrap"><img src="'+src+'" alt="'+dev.name+'" class="portfolio-avatar" onerror="this.src=\''+fb+'\'"></div>'
         + '<div class="portfolio-name">'+dev.name+'</div>'
