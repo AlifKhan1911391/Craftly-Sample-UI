@@ -16,8 +16,9 @@
         }
         .cover-photo {
             height: 200px;
-            background: #000;
             width: 100%;
+            object-fit: cover;
+            display: block;
         }
         .profile-info-section {
             padding: 0 30px 30px;
@@ -96,6 +97,57 @@
             color: #fff;
             font-size: 32px;
         }
+
+        /* Profile page main content: 2-column (feed + sidebar) */
+        .profile-main-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .profile-meta > div:last-child {
+                margin-top: 10px;
+                margin-bottom: 0 !important;
+            }
+
+            .profile-name-large {
+                font-size: 22px;
+            }
+
+            .profile-handle {
+                font-size: 13px;
+            }
+
+            .profile-stats {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .tab-item {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+
+            .profile-info-section {
+                padding: 0 15px 20px;
+            }
+
+            .profile-avatar-large {
+                width: 100px;
+                height: 100px;
+                margin-top: -50px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -104,7 +156,7 @@
             <div class="logo">
                 <span>Craftly Internet</span>
             </div>
-                        <button class="hamburger" onclick="toggleMenu()">
+            <button class="hamburger" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -124,7 +176,7 @@
 
     <main class="container" style="padding-top: 30px;">
         <div class="profile-header">
-            <div class="cover-photo"></div>
+            <img src="photos/1777050519192.png" alt="Cover Photo" class="cover-photo">
             <div class="profile-info-section">
                 <div class="profile-meta">
                     <div>
@@ -154,7 +206,7 @@
             </div>
         </div>
 
-        <div class="main-content" style="grid-template-columns: 1fr 350px;">
+        <div class="profile-main-content">
             <section class="feed">
                 <article class="post-card">
                     <div class="post-header">
@@ -166,8 +218,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="post-content">🤖 Craftly Robot — Bangladesh’s First Homegrown AI<br>
-It’s an AI robot that can chat with you like ChatGPT, but it can also build software like Google AI Studio or Claude. The most important part? It is completely ours. No foreign APIs, no dependence on ChatGPT, and no reliance on Google.<br>
+                    <div class="post-content">🤖 Craftly Robot — Bangladesh's First Homegrown AI
+It's an AI robot that can chat with you like ChatGPT, but it can also build software like Google AI Studio or Claude. The most important part? It is completely ours. No foreign APIs, no dependence on ChatGPT, and no reliance on Google.
 Check out the infographic below to see how it works! 🚀🇧🇩</div>
                     <img src="photos/FB_IMG_1777027614999.jpg" alt="Craftly Robot Infographic" class="post-image">
                 </article>
