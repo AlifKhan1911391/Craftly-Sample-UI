@@ -68,13 +68,18 @@
             <div class="logo">
                 <span>Craftly Internet</span>
             </div>
-            <nav class="nav-links">
+                        <button class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav-links" id="navLinks">
                 <a href="index.html">Home</a>
                 <a href="explore.html">Explore</a>
                 <a href="apps.html">Apps</a>
                 <a href="developers.html">Developers</a>
             </nav>
-            <div class="nav-actions">
+            <div class="nav-actions" id="navActions">
                 <a href="login.html" class="btn btn-outline">Login</a>
                 <a href="register.html" class="btn btn-dark">Join Craftly</a>
             </div>
@@ -145,5 +150,12 @@
             <p>&copy; 2026 Craftly Internet. Built with Craftly Robot.</p>
         </div>
     </footer>
+
+<script>
+function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('navActions').classList.toggle('open');
+}
+</script>
 </body>
 </html>
