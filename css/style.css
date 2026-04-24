@@ -262,3 +262,49 @@ footer {
         display: none;
     }
 }
+
+/* ===== MOBILE NAVBAR FIX ===== */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 5px;
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links,
+    .nav-actions {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        width: 100%;
+        padding: 15px 0;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .nav-links.open,
+    .nav-actions.open {
+        display: flex;
+    }
+
+    .nav-container {
+        flex-wrap: wrap;
+    }
+}
