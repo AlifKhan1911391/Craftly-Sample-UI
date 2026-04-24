@@ -1,62 +1,30 @@
-/* ============================================================
-   Craftly Internet — animation.js
-   Place this file in the /js folder of your project.
-   Connect it in every HTML file just before </body>:
-       <script src="js/animation.js"></script>
-
-   Features:
-   1. Hamburger → X animated toggle (mobile menu)
-   2. Smooth slide-down / slide-up for the mobile nav panel
-   3. Smart navbar: hides when scrolling DOWN, reappears when
-      scrolling UP (with a smooth CSS transition)
-   ============================================================ */
-
 (function () {
   "use strict";
 
-  /* ----------------------------------------------------------
-     1.  HAMBURGER  ↔  X  ANIMATION
-  ---------------------------------------------------------- */
-
-  /**
-   * Replaces the old inline onclick="toggleMenu()" logic.
-   * Animates the three bars into an X on open, back on close.
-   * Also triggers the smooth slide for the nav panel.
-   */
   function initHamburger() {
     const hamburger = document.querySelector(".hamburger");
     if (!hamburger) return;
 
-    // Remove any inline onclick so we own the event fully
     hamburger.removeAttribute("onclick");
 
     hamburger.addEventListener("click", function () {
       const isOpen = hamburger.classList.toggle("is-open");
 
-      // Toggle nav links & actions (keep same class names the CSS uses)
       const navLinks = document.getElementById("navLinks");
       const navActions = document.getElementById("navActions");
 
       if (navLinks) navLinks.classList.toggle("open", isOpen);
       if (navActions) navActions.classList.toggle("open", isOpen);
 
-      // Accessibility
       hamburger.setAttribute("aria-expanded", String(isOpen));
     });
   }
-
-  /* ----------------------------------------------------------
-     2.  SMOOTH MOBILE MENU SLIDE
-     We inject the required CSS once via JS so you don't have
-     to touch style.css at all.
-  ---------------------------------------------------------- */
 
   function injectAnimationStyles() {
     const style = document.createElement("style");
     style.id = "craftly-animation-styles";
     style.textContent = `
 
-      /* ---- Hamburger → X morph ---- */
       .hamburger span {
         transform-origin: center;
         transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
@@ -64,30 +32,24 @@
                     top       0.35s cubic-bezier(0.23, 1, 0.32, 1);
       }
 
-      /* Top bar: rotate +45° and slide down */
       .hamburger.is-open span:nth-child(1) {
         transform: translateY(7px) rotate(45deg);
       }
 
-      /* Middle bar: fade out */
       .hamburger.is-open span:nth-child(2) {
         opacity: 0;
         transform: scaleX(0);
       }
 
-      /* Bottom bar: rotate -45° and slide up */
       .hamburger.is-open span:nth-child(3) {
         transform: translateY(-7px) rotate(-45deg);
       }
 
-      /* ---- Smooth mobile nav slide-down ---- */
       @media (max-width: 768px) {
 
-        /* Override the display:none approach with a
-           max-height clip so we can animate it */
         .nav-links,
         .nav-actions {
-          display: flex !important;      /* keep flex layout */
+          display: flex !important;
           overflow: hidden;
           max-height: 0;
           opacity: 0;
@@ -102,7 +64,7 @@
 
         .nav-links.open,
         .nav-actions.open {
-          max-height: 400px;             /* tall enough for all items */
+          max-height: 400px;
           opacity: 1;
           pointer-events: auto;
           padding-top: 15px !important;
@@ -111,7 +73,6 @@
         }
       }
 
-      /* ---- Smart navbar scroll transitions ---- */
       header {
         transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
                     box-shadow 0.3s ease,
@@ -131,24 +92,19 @@
     document.head.appendChild(style);
   }
 
-  /* ----------------------------------------------------------
-     3.  SMART NAVBAR  —  hide on scroll DOWN, show on scroll UP
-  ---------------------------------------------------------- */
-
   function initScrollBehavior() {
     const header = document.querySelector("header");
     if (!header) return;
 
     let lastScrollY = window.scrollY;
     let ticking = false;
-    const SCROLL_THRESHOLD = 10;   // px — ignore tiny jitters
-    const TOP_THRESHOLD    = 60;   // px — always show near the top
+    const SCROLL_THRESHOLD = 10;
+    const TOP_THRESHOLD    = 60;
 
     function handleScroll() {
       const currentScrollY = window.scrollY;
       const diff = currentScrollY - lastScrollY;
 
-      // Always show when very close to the top
       if (currentScrollY < TOP_THRESHOLD) {
         header.classList.remove("nav-hidden");
         header.classList.remove("nav-scrolled");
@@ -157,19 +113,15 @@
         return;
       }
 
-      // Add shadow once we've scrolled away from top
       header.classList.add("nav-scrolled");
 
       if (Math.abs(diff) > SCROLL_THRESHOLD) {
         if (diff > 0) {
-          // Scrolling DOWN → hide
           header.classList.add("nav-hidden");
 
-          // Close the mobile menu if it happens to be open
           const hamburger = document.querySelector(".hamburger.is-open");
           if (hamburger) hamburger.click();
         } else {
-          // Scrolling UP → reveal
           header.classList.remove("nav-hidden");
         }
         lastScrollY = currentScrollY;
@@ -186,10 +138,6 @@
     }, { passive: true });
   }
 
-  /* ----------------------------------------------------------
-     BOOT — run after the DOM is ready
-  ---------------------------------------------------------- */
-
   function init() {
     injectAnimationStyles();
     initHamburger();
@@ -199,7 +147,7 @@
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
-    init(); // already ready (script placed at bottom of <body>)
+    init();
   }
 
 })();
