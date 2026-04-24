@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developers | Craftly Internet</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .dev-hero {
+            padding: 60px 0;
+            text-align: center;
+            background: #fff;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .dev-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 40px 0;
+        }
+        .dev-card {
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .dev-card:hover {
+            border-color: #000;
+            transform: translateY(-5px);
+        }
+        .dev-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            object-fit: cover;
+            border: 1px solid #eee;
+        }
+        .dev-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .dev-role {
+            font-size: 14px;
+            color: var(--secondary-text);
+            margin-bottom: 15px;
+        }
+        .dev-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+        .dev-stats span b {
+            display: block;
+            font-size: 16px;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="photos/craftly.png" alt="Craftly Logo">
+                <span>Craftly Internet</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="explore.html">Explore</a>
+                <a href="apps.html">Apps</a>
+                <a href="developers.html">Developers</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-dark">Join Craftly</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="dev-hero">
+        <div class="container">
+            <h1>Meet the Builders</h1>
+            <p>Connect with the 76,000+ visionaries training the future of AI.</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="dev-grid">
+            <!-- Dev 1 -->
+            <div class="dev-card">
+                <img src="https://ui-avatars.com/api/?name=SK+Wasif+Abdullah+Musa&background=000&color=fff" alt="Musa" class="dev-avatar">
+                <div class="dev-name">SK Wasif Abdullah Musa</div>
+                <div class="dev-role">Founder & Visionary</div>
+                <div class="dev-stats">
+                    <span><b>15k</b> Followers</span>
+                    <span><b>42</b> Apps</span>
+                </div>
+                <a href="profile.html" class="btn btn-dark" style="display: block;">View Profile</a>
+            </div>
+
+            <!-- Dev 2 -->
+            <div class="dev-card">
+                <img src="https://ui-avatars.com/api/?name=Mahadi+Islam+Alif&background=000&color=fff" alt="Alif" class="dev-avatar">
+                <div class="dev-name">Mahadi Islam Alif</div>
+                <div class="dev-role">Operations Engineer</div>
+                <div class="dev-stats">
+                    <span><b>1.2k</b> Followers</span>
+                    <span><b>12</b> Apps</span>
+                </div>
+                <a href="profile.html" class="btn btn-dark" style="display: block;">View Profile</a>
+            </div>
+
+            <!-- Dev 3 -->
+            <div class="dev-card">
+                <img src="https://ui-avatars.com/api/?name=Sifat+Hasan&background=eee&color=000" alt="Sifat" class="dev-avatar">
+                <div class="dev-name">Sifat Hasan</div>
+                <div class="dev-role">AI Trainer</div>
+                <div class="dev-stats">
+                    <span><b>850</b> Followers</span>
+                    <span><b>5</b> Apps</span>
+                </div>
+                <a href="#" class="btn btn-outline" style="display: block;">View Profile</a>
+            </div>
+
+            <!-- Dev 4 -->
+            <div class="dev-card">
+                <img src="https://ui-avatars.com/api/?name=Anika+Tabassum&background=eee&color=000" alt="Anika" class="dev-avatar">
+                <div class="dev-name">Anika Tabassum</div>
+                <div class="dev-role">UI/UX Designer</div>
+                <div class="dev-stats">
+                    <span><b>2.1k</b> Followers</span>
+                    <span><b>8</b> Apps</span>
+                </div>
+                <a href="#" class="btn btn-outline" style="display: block;">View Profile</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Craftly Internet. Built with Craftly Robot.</p>
+        </div>
+    </footer>
+</body>
+</html>

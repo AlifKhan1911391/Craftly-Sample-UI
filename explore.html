@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore | Craftly Internet</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .search-bar {
+            width: 100%;
+            padding: 15px 25px;
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            font-size: 16px;
+            margin-bottom: 30px;
+            background: #f9f9f9;
+        }
+        .explore-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .explore-item {
+            aspect-ratio: 1 / 1;
+            background: #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .explore-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+        .explore-item:hover img {
+            transform: scale(1.05);
+        }
+        .explore-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .explore-item:hover .explore-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="photos/craftly.png" alt="Craftly Logo">
+                <span>Craftly Internet</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="explore.html">Explore</a>
+                <a href="apps.html">Apps</a>
+                <a href="developers.html">Developers</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-dark">Join Craftly</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 40px;">
+        <input type="text" class="search-bar" placeholder="Search for developers, apps, or topics...">
+        
+        <div class="explore-grid">
+            <div class="explore-item">
+                <img src="photos/robot_infographic.jpg" alt="Robot">
+                <div class="explore-overlay"><i class="fa-solid fa-heart"></i> 856</div>
+            </div>
+            <div class="explore-item">
+                <img src="photos/certificate.jpg" alt="Certificate">
+                <div class="explore-overlay"><i class="fa-solid fa-heart"></i> 1.2k</div>
+            </div>
+            <div class="explore-item">
+                <div style="width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; color: #fff; font-family: var(--font-logo); font-size: 24px;">Craftly Robot</div>
+                <div class="explore-overlay"><i class="fa-solid fa-heart"></i> 450</div>
+            </div>
+            <!-- Placeholder items -->
+            <div class="explore-item"><div style="width: 100%; height: 100%; background: #f0f0f0;"></div></div>
+            <div class="explore-item"><div style="width: 100%; height: 100%; background: #e0e0e0;"></div></div>
+            <div class="explore-item"><div style="width: 100%; height: 100%; background: #d0d0d0;"></div></div>
+            <div class="explore-item"><div style="width: 100%; height: 100%; background: #c0c0c0;"></div></div>
+            <div class="explore-item"><div style="width: 100%; height: 100%; background: #b0b0b0;"></div></div>
+            <div class="explore-item"><div style="width: 100%; height: 100%; background: #a0a0a0;"></div></div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Craftly Internet. Built with Craftly Robot.</p>
+        </div>
+    </footer>
+</body>
+</html>
