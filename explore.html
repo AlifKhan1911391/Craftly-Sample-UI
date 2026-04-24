@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Developers | Craftly Internet</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .explore-hero {
+            background: #000;
+            color: #fff;
+            padding: 60px 0 50px;
+            text-align: center;
+        }
+        .explore-hero h1 { font-size: 38px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .explore-hero p { font-size: 16px; opacity: 0.6; margin-bottom: 30px; }
+        .search-wrap { max-width: 560px; margin: 0 auto; position: relative; }
+        .search-wrap i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #888; font-size: 15px; }
+        .explore-search { width: 100%; padding: 14px 20px 14px 46px; border-radius: 30px; border: none; font-size: 15px; font-family: var(--font-main); outline: none; }
+        .filter-bar { display: flex; gap: 10px; padding: 24px 0 10px; overflow-x: auto; }
+        .filter-bar::-webkit-scrollbar { display: none; }
+        .filter-btn { padding: 7px 18px; border-radius: 20px; border: 1px solid var(--border-color); background: #fff; font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: 0.2s; font-family: var(--font-main); }
+        .filter-btn.active, .filter-btn:hover { background: #000; color: #fff; border-color: #000; }
+        .dev-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; margin-bottom: 60px; }
+        .dev-row { display: grid; grid-template-columns: 60px 1fr auto; align-items: center; gap: 16px; padding: 18px 20px; background: #fff; border: 1px solid var(--border-color); border-radius: 12px; cursor: pointer; transition: 0.2s; }
+        .dev-row:hover { border-color: #000; box-shadow: 0 4px 16px rgba(0,0,0,0.07); transform: translateY(-1px); }
+        .dev-row-avatar { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 1px solid #eee; }
+        .dev-row-info h3 { font-size: 16px; font-weight: 700; margin-bottom: 3px; }
+        .dev-row-info .handle { font-size: 12px; color: var(--secondary-text); margin-bottom: 5px; }
+        .dev-row-info .role-badge { display: inline-block; padding: 2px 10px; border-radius: 20px; background: #f2f2f2; font-size: 11px; font-weight: 600; color: #444; }
+        .dev-row-info .bio-short { font-size: 13px; color: #555; margin-top: 6px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .dev-row-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; min-width: 80px; }
+        .dev-row-meta .followers { font-size: 13px; font-weight: 700; }
+        .dev-row-meta .followers span { font-size: 11px; font-weight: 400; color: #999; display: block; }
+        .dev-row-meta .apps-count { font-size: 11px; color: var(--secondary-text); }
+        .dev-row-meta .view-btn { padding: 5px 14px; background: #000; color: #fff; border-radius: 20px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; white-space: nowrap; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+        .skill-tag { padding: 2px 8px; background: #000; color: #fff; border-radius: 4px; font-size: 10px; font-weight: 600; }
+        .state-box { text-align: center; padding: 60px 20px; color: #999; }
+        .state-box i { font-size: 40px; margin-bottom: 15px; display: block; }
+        .no-results { display: none; }
+
+        /* Modal */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 9000; align-items: flex-start; justify-content: center; padding: 30px 15px; overflow-y: auto; }
+        .modal-overlay.open { display: flex; }
+        .portfolio-modal { background: #fff; border-radius: 20px; max-width: 720px; width: 100%; overflow: hidden; position: relative; margin: auto; animation: slideUp 0.25s ease; }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal-close { position: absolute; top: 16px; right: 20px; background: rgba(0,0,0,0.12); border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: 0.2s; }
+        .modal-close:hover { background: #000; color: #fff; }
+        .portfolio-cover { height: 160px; background: linear-gradient(135deg, #000 0%, #333 100%); position: relative; }
+        .portfolio-cover-pattern { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 22px 22px; }
+        .portfolio-body { padding: 0 30px 30px; }
+        .portfolio-avatar-wrap { margin-top: -50px; margin-bottom: 14px; }
+        .portfolio-avatar { width: 100px; height: 100px; border-radius: 50%; border: 4px solid #fff; object-fit: cover; display: block; }
+        .portfolio-name { font-size: 26px; font-weight: 800; margin-bottom: 2px; }
+        .portfolio-handle { color: #888; font-size: 14px; margin-bottom: 10px; }
+        .portfolio-role-badge { display: inline-block; padding: 3px 12px; background: #000; color: #fff; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 14px; }
+        .portfolio-bio { font-size: 15px; line-height: 1.6; color: #444; margin-bottom: 18px; }
+        .portfolio-stats { display: flex; gap: 24px; padding: 16px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin-bottom: 24px; }
+        .portfolio-stat { text-align: center; }
+        .portfolio-stat .num { font-size: 22px; font-weight: 800; }
+        .portfolio-stat .lbl { font-size: 11px; color: #999; margin-top: 2px; }
+        .portfolio-section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin: 20px 0 12px; }
+        .portfolio-skills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+        .portfolio-skill { padding: 5px 14px; background: #f2f2f2; border-radius: 20px; font-size: 13px; font-weight: 500; }
+        .project-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; margin-bottom: 4px; }
+        .project-card { border: 1px solid #eee; border-radius: 12px; padding: 16px; }
+        .project-icon { width: 48px; height: 48px; border-radius: 12px; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 12px; }
+        .project-name { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+        .project-desc { font-size: 12px; color: #666; margin-bottom: 10px; line-height: 1.5; }
+        .project-meta { font-size: 11px; color: #999; display: flex; gap: 10px; }
+        .featured-post { background: #f9f9f9; border-radius: 12px; padding: 16px; font-size: 14px; line-height: 1.6; color: #333; border-left: 3px solid #000; margin-top: 4px; }
+        .portfolio-actions { display: flex; gap: 12px; margin-top: 24px; }
+        .portfolio-actions .btn { flex: 1; text-align: center; }
+        @media (max-width: 600px) { .dev-row { grid-template-columns: 50px 1fr; } .dev-row-meta { display: none; } .explore-hero h1 { font-size: 26px; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-container">
+        <div class="logo"><span>Craftly Internet</span></div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="explore.html" style="font-weight:700; border-bottom:2px solid #000; padding-bottom:2px;">Explore</a>
+            <a href="apps.html">Apps</a>
+            <a href="developers.html">Developers</a>
+        </nav>
+        <div class="nav-actions">
+            <a href="login.html" class="btn btn-outline">Login</a>
+            <a href="register.html" class="btn btn-dark">Join Craftly</a>
+        </div>
+    </div>
+</header>
+
+<section class="explore-hero">
+    <div class="container">
+        <h1>Explore Developers</h1>
+        <p>Find talented builders from Bangladesh and beyond who are shaping the future of AI.</p>
+        <div class="search-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" class="explore-search" id="devSearch" placeholder="Search by name, skill, or role…">
+        </div>
+    </div>
+</section>
+
+<main class="container">
+    <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-skill="all">All Developers</button>
+        <button class="filter-btn" data-skill="Android">Android</button>
+        <button class="filter-btn" data-skill="AI">AI / ML</button>
+        <button class="filter-btn" data-skill="UI">UI / UX</button>
+        <button class="filter-btn" data-skill="Backend">Backend</button>
+        <button class="filter-btn" data-skill="Kotlin">Kotlin</button>
+    </div>
+    <div id="devList" class="dev-list">
+        <div class="state-box">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+            <p>Loading developers…</p>
+        </div>
+    </div>
+    <div class="no-results state-box" id="noResults">
+        <i class="fa-solid fa-user-slash"></i>
+        <p>No developers match your search.</p>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2026 Craftly Internet. Built with Craftly Robot. From Bangladesh for the World.</p>
+    </div>
+</footer>
+
+<div class="modal-overlay" id="portfolioModal">
+    <div class="portfolio-modal" id="portfolioContent"></div>
+</div>
+
+<script>
+let allDevs = [];
+let activeFilter = 'all';
+let searchQuery = '';
+
+async function loadDevelopers() {
+    try {
+        const res = await fetch('developers.json');
+        if (!res.ok) throw new Error('Network error');
+        allDevs = await res.json();
+        renderList();
+    } catch (err) {
+        document.getElementById('devList').innerHTML = '<div class="state-box"><i class="fa-solid fa-triangle-exclamation"></i><p>Could not load developers.json — make sure it is in the project root.</p></div>';
+    }
+}
+
+function avatarUrl(name) {
+    return 'https://ui-avatars.com/api/?name=' + encodeURIComponent(name) + '&background=000&color=fff&size=200';
+}
+
+function renderList() {
+    const list = document.getElementById('devList');
+    const noResults = document.getElementById('noResults');
+    const q = searchQuery.toLowerCase();
+    const filtered = allDevs.filter(dev => {
+        const matchSearch = !q || dev.name.toLowerCase().includes(q) || dev.role.toLowerCase().includes(q) || (dev.skills||[]).some(s => s.toLowerCase().includes(q));
+        const matchFilter = activeFilter === 'all' || (dev.skills||[]).some(s => s.toLowerCase().includes(activeFilter.toLowerCase()));
+        return matchSearch && matchFilter;
+    });
+    if (!filtered.length) {
+        list.innerHTML = '';
+        noResults.style.display = 'block';
+        return;
+    }
+    noResults.style.display = 'none';
+    list.innerHTML = filtered.map(dev => {
+        const src = dev.avatar || avatarUrl(dev.name);
+        const fallback = avatarUrl(dev.name);
+        const skills = (dev.skills||[]).slice(0,4).map(s => '<span class="skill-tag">'+s+'</span>').join('');
+        return '<div class="dev-row" onclick="openPortfolio(\''+dev.id+'\')">'
+            + '<img src="'+src+'" alt="'+dev.name+'" class="dev-row-avatar" onerror="this.src=\''+fallback+'\'">'
+            + '<div class="dev-row-info">'
+            + '<h3>'+dev.name+'</h3>'
+            + '<div class="handle">'+dev.handle+'</div>'
+            + '<span class="role-badge">'+dev.role+'</span>'
+            + '<p class="bio-short">'+dev.bio+'</p>'
+            + '<div class="skill-tags">'+skills+'</div>'
+            + '</div>'
+            + '<div class="dev-row-meta">'
+            + '<div class="followers">'+dev.followers+'<span>followers</span></div>'
+            + '<div class="apps-count"><i class="fa-solid fa-mobile-screen"></i> '+dev.apps+' apps</div>'
+            + '<button class="view-btn">View Portfolio</button>'
+            + '</div></div>';
+    }).join('');
+}
+
+document.getElementById('filterBar').addEventListener('click', function(e) {
+    var btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    activeFilter = btn.dataset.skill;
+    renderList();
+});
+
+document.getElementById('devSearch').addEventListener('input', function(e) {
+    searchQuery = e.target.value;
+    renderList();
+});
+
+function openPortfolio(id) {
+    var dev = allDevs.find(function(d){ return d.id === id; });
+    if (!dev) return;
+    var src = dev.avatar || avatarUrl(dev.name);
+    var fb = avatarUrl(dev.name);
+    var projects = (dev.projects||[]).map(function(p){
+        return '<div class="project-card">'
+            + '<div class="project-icon"><i class="fa-solid '+p.icon+'"></i></div>'
+            + '<div class="project-name">'+p.name+'</div>'
+            + '<div class="project-desc">'+p.desc+'</div>'
+            + '<div class="project-meta"><span><i class="fa-solid fa-download"></i> '+p.installs+'</span><span><i class="fa-solid fa-star"></i> '+p.rating+'</span></div>'
+            + '</div>';
+    }).join('');
+    var skills = (dev.skills||[]).map(function(s){ return '<span class="portfolio-skill">'+s+'</span>'; }).join('');
+    document.getElementById('portfolioContent').innerHTML =
+        '<button class="modal-close" onclick="closePortfolio()"><i class="fa-solid fa-xmark"></i></button>'
+        + '<div class="portfolio-cover"><div class="portfolio-cover-pattern"></div></div>'
+        + '<div class="portfolio-body">'
+        + '<div class="portfolio-avatar-wrap"><img src="'+src+'" alt="'+dev.name+'" class="portfolio-avatar" onerror="this.src=\''+fb+'\'"></div>'
+        + '<div class="portfolio-name">'+dev.name+'</div>'
+        + '<div class="portfolio-handle">'+dev.handle+' &nbsp;·&nbsp; <i class="fa-solid fa-location-dot"></i> '+dev.location+'</div>'
+        + '<span class="portfolio-role-badge">'+dev.role+'</span>'
+        + '<p class="portfolio-bio">'+dev.bio+'</p>'
+        + '<div class="portfolio-stats">'
+        + '<div class="portfolio-stat"><div class="num">'+dev.followers+'</div><div class="lbl">Followers</div></div>'
+        + '<div class="portfolio-stat"><div class="num">'+dev.apps+'</div><div class="lbl">Apps Built</div></div>'
+        + '<div class="portfolio-stat"><div class="num">'+((dev.skills||[]).length)+'</div><div class="lbl">Skills</div></div>'
+        + '</div>'
+        + '<div class="portfolio-section-title">Skills</div>'
+        + '<div class="portfolio-skills">'+skills+'</div>'
+        + '<div class="portfolio-section-title">Projects</div>'
+        + '<div class="project-cards">'+projects+'</div>'
+        + '<div class="portfolio-section-title">Featured Post</div>'
+        + '<div class="featured-post">'+dev.featured_post+'</div>'
+        + '<div class="portfolio-actions">'
+        + '<a href="profile.html" class="btn btn-dark">View Full Profile</a>'
+        + '<button class="btn btn-outline" onclick="closePortfolio()">Close</button>'
+        + '</div></div>';
+    document.getElementById('portfolioModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closePortfolio() {
+    document.getElementById('portfolioModal').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+document.getElementById('portfolioModal').addEventListener('click', function(e) {
+    if (e.target === document.getElementById('portfolioModal')) closePortfolio();
+});
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePortfolio(); });
+
+loadDevelopers();
+</script>
+</body>
+</html>

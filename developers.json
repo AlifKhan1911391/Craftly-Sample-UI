@@ -1,0 +1,100 @@
+[
+  {
+    "id": "musa",
+    "name": "SK Wasif Abdullah Musa",
+    "handle": "@musa_craftly",
+    "role": "Founder & Visionary",
+    "location": "Chittagong, Bangladesh",
+    "bio": "Dreamt of building Bangladesh's own AI ecosystem. Founded Craftly to give every developer the power of AI without depending on foreign APIs.",
+    "avatar": "https://ui-avatars.com/api/?name=SK+Wasif+Abdullah+Musa&background=000&color=fff&size=200",
+    "followers": "15k",
+    "apps": 42,
+    "skills": ["AI Architecture", "Product Vision", "Kotlin", "System Design"],
+    "projects": [
+      { "name": "AgenticHelper", "desc": "An AI assistant that automates daily tasks on Android.", "installs": "5.4k", "rating": 5.0, "icon": "fa-robot" },
+      { "name": "Craftly Robot", "desc": "Bangladesh's first homegrown AI engine.", "installs": "20k", "rating": 5.0, "icon": "fa-microchip" }
+    ],
+    "featured_post": "Alhamdulillah, Team Craftly secured 3rd place at the District Level of National Science and Technology Week — promoted to Chittagong Divisional Level! 🏆"
+  },
+  {
+    "id": "alif",
+    "name": "Mahadi Islam Alif",
+    "handle": "@alif_engineer",
+    "role": "Operations Engineer",
+    "location": "Chittagong, Bangladesh",
+    "bio": "Building the future of AI in Bangladesh. Part of the Craftly Robot core team. Passionate about Android development and collective intelligence.",
+    "avatar": "https://ui-avatars.com/api/?name=Mahadi+Islam+Alif&background=111&color=fff&size=200",
+    "followers": "1.2k",
+    "apps": 12,
+    "skills": ["Android", "AI Training", "UI/UX", "Kotlin", "Research"],
+    "projects": [
+      { "name": "FoodieExpress", "desc": "Complete food delivery solution built in 60 seconds with AI.", "installs": "1.2k", "rating": 4.8, "icon": "fa-utensils" },
+      { "name": "SkyCast BD", "desc": "Hyper-local Bangladesh weather with AI rain prediction.", "installs": "800", "rating": 4.5, "icon": "fa-cloud-sun" }
+    ],
+    "featured_post": "🤖 Craftly Robot — Bangladesh's First Homegrown AI. No foreign APIs, no ChatGPT dependence, completely ours! 🚀🇧🇩"
+  },
+  {
+    "id": "sifat",
+    "name": "Sifat Hasan",
+    "handle": "@sifat_ai",
+    "role": "AI Trainer",
+    "location": "Dhaka, Bangladesh",
+    "bio": "Specializing in large language model fine-tuning and dataset curation for Bangla-language AI systems.",
+    "avatar": "",
+    "followers": "850",
+    "apps": 5,
+    "skills": ["LLM Training", "Python", "Data Curation", "NLP"],
+    "projects": [
+      { "name": "BanglaGPT Dataset", "desc": "The largest open Bangla text corpus for AI training.", "installs": "N/A", "rating": 4.9, "icon": "fa-database" }
+    ],
+    "featured_post": "Just finished annotating 200k Bangla sentences for the Craftly Robot training pipeline. Every word matters. 💪"
+  },
+  {
+    "id": "anika",
+    "name": "Anika Tabassum",
+    "handle": "@anika_designs",
+    "role": "UI/UX Designer",
+    "location": "Chittagong, Bangladesh",
+    "bio": "Designing intuitive interfaces for AI-powered applications. Believe that great technology needs equally great design to reach everyone.",
+    "avatar": "",
+    "followers": "2.1k",
+    "apps": 8,
+    "skills": ["Figma", "UI Design", "Motion Design", "User Research"],
+    "projects": [
+      { "name": "Craftly Design System", "desc": "The visual language behind all Craftly products.", "installs": "N/A", "rating": 5.0, "icon": "fa-palette" }
+    ],
+    "featured_post": "Launched the Craftly Internet design system today. 120 components, dark mode ready, and optimized for low-bandwidth users in Bangladesh. 🎨"
+  },
+  {
+    "id": "nabil",
+    "name": "Nabil Rahman",
+    "handle": "@nabil_dev",
+    "role": "Backend Engineer",
+    "location": "Sylhet, Bangladesh",
+    "bio": "Building the invisible engine behind Craftly Internet. Obsessed with performance, scale, and clean architecture.",
+    "avatar": "",
+    "followers": "620",
+    "apps": 3,
+    "skills": ["Node.js", "PostgreSQL", "Docker", "API Design"],
+    "projects": [
+      { "name": "CraftlyAPI", "desc": "The core REST and GraphQL API powering Craftly Internet.", "installs": "N/A", "rating": 4.7, "icon": "fa-server" }
+    ],
+    "featured_post": "Craftly API just handled 50k requests in a single minute during the science fair live demo. Zero downtime. All homegrown infra. 🔥"
+  },
+  {
+    "id": "riya",
+    "name": "Riya Chowdhury",
+    "handle": "@riya_mobile",
+    "role": "Android Developer",
+    "location": "Comilla, Bangladesh",
+    "bio": "Android developer with 3 years of experience. Joined Craftly to help make AI-generated apps production-quality.",
+    "avatar": "",
+    "followers": "430",
+    "apps": 6,
+    "skills": ["Android", "Jetpack Compose", "Kotlin", "Firebase"],
+    "projects": [
+      { "name": "StudyBuddy BD", "desc": "AI-powered study assistant for Bangladeshi students.", "installs": "3.2k", "rating": 4.6, "icon": "fa-book-open" }
+    ],
+    "featured_post": "StudyBuddy BD just crossed 3,000 downloads! Built it in one weekend using Craftly Robot. This is the future. 📚"
+  }
+]
