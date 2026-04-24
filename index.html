@@ -13,13 +13,18 @@
             <div class="logo">
                 <span>Craftly Internet</span>
             </div>
-            <nav class="nav-links">
+                        <button class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav-links" id="navLinks">
                 <a href="index.html">Home</a>
                 <a href="explore.html">Explore</a>
                 <a href="apps.html">Apps</a>
                 <a href="developers.html">Developers</a>
             </nav>
-            <div class="nav-actions">
+            <div class="nav-actions" id="navActions">
                 <a href="login.html" class="btn btn-outline">Login</a>
                 <a href="register.html" class="btn btn-dark">Join Craftly</a>
             </div>
@@ -52,7 +57,7 @@
                 </div>
                 <div class="sidebar-card">
                     <p style="font-size: 13px; color: #666;">Craftly Robot v2.0 is now available for download. Build your first app today!</p>
-                    <a href="#" style="font-size: 13px; font-weight: 700; margin-top: 10px; display: block;">Download Now →</a>
+                    <a href="#" style="font-size: 13px; font-weight: 700; margin-top: 10px; display: block;">Download Now â†’</a>
                 </div>
             </aside>
 
@@ -80,7 +85,7 @@
                             <img src="https://ui-avatars.com/api/?name=SK+Wasif+Abdullah+Musa&background=000&color=fff" alt="Musa" class="user-avatar">
                             <div>
                                 <div class="user-name">SK Wasif Abdullah Musa</div>
-                                <div class="post-time">Founder @ Craftly • 2 hours ago</div>
+                                <div class="post-time">Founder @ Craftly â€¢ 2 hours ago</div>
                             </div>
                         </div>
                         <i class="fa-solid fa-ellipsis"></i>
@@ -89,7 +94,7 @@
 
 This achievement belongs to all of you who have worked tirelessly day and night to build Craftly.
 
-Insha Allah, see you soon, people of Chittagong! 🤍</div>
+Insha Allah, see you soon, people of Chittagong! ðŸ¤</div>
                     <img src="photos/FB_IMG_1777027286578.jpg" alt="Achievement" class="post-image">
                     <div class="post-actions">
                         <div class="action-item"><i class="fa-regular fa-heart"></i> 1.2k</div>
@@ -105,16 +110,16 @@ Insha Allah, see you soon, people of Chittagong! 🤍</div>
                             <img src="https://ui-avatars.com/api/?name=Mahadi+Islam+Alif&background=000&color=fff" alt="Alif" class="user-avatar">
                             <div>
                                 <div class="user-name">Mahadi Islam Alif</div>
-                                <div class="post-time">Engineer @ Operations • 5 hours ago</div>
+                                <div class="post-time">Engineer @ Operations â€¢ 5 hours ago</div>
                             </div>
                         </div>
                         <i class="fa-solid fa-ellipsis"></i>
                     </div>
-                    <div class="post-content">🤖 Craftly Robot — Bangladesh’s First Homegrown AI
+                    <div class="post-content">ðŸ¤– Craftly Robot â€” Bangladeshâ€™s First Homegrown AI
 
-It’s an AI robot that can chat with you like ChatGPT, but it can also build software like Google AI Studio or Claude. The most important part? It is completely ours. No foreign APIs, no dependence on ChatGPT, and no reliance on Google.
+Itâ€™s an AI robot that can chat with you like ChatGPT, but it can also build software like Google AI Studio or Claude. The most important part? It is completely ours. No foreign APIs, no dependence on ChatGPT, and no reliance on Google.
 
-Check out the infographic below to see how it works! 🚀🇧🇩</div>
+Check out the infographic below to see how it works! ðŸš€ðŸ‡§ðŸ‡©</div>
                     <img src="photos/FB_IMG_1777027614999.jpg" alt="Craftly Robot Infographic" class="post-image">
                     <div class="post-actions">
                         <div class="action-item"><i class="fa-regular fa-heart"></i> 856</div>
@@ -171,5 +176,12 @@ Check out the infographic below to see how it works! 🚀🇧🇩</div>
             </div>
         </div>
     </footer>
+
+<script>
+function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('navActions').classList.toggle('open');
+}
+</script>
 </body>
 </html>
