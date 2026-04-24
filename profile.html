@@ -104,13 +104,18 @@
             <div class="logo">
                 <span>Craftly Internet</span>
             </div>
-            <nav class="nav-links">
+                        <button class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav-links" id="navLinks">
                 <a href="index.html">Home</a>
                 <a href="explore.html">Explore</a>
                 <a href="apps.html">Apps</a>
                 <a href="developers.html">Developers</a>
             </nav>
-            <div class="nav-actions">
+            <div class="nav-actions" id="navActions">
                 <a href="messages.html" class="btn btn-outline"><i class="fa-regular fa-envelope"></i></a>
                 <a href="profile.html" class="btn btn-dark">My Profile</a>
             </div>
@@ -125,7 +130,7 @@
                     <div>
                         <img src="https://ui-avatars.com/api/?name=Mahadi+Islam+Alif&background=000&color=fff&size=150" alt="Alif" class="profile-avatar-large">
                         <div class="profile-name-large">Mahadi Islam Alif</div>
-                        <div class="profile-handle">@alif_engineer • Engineer @ Operations</div>
+                        <div class="profile-handle">@alif_engineer â€¢ Engineer @ Operations</div>
                     </div>
                     <div style="display: flex; gap: 10px; margin-bottom: 15px;">
                         <button class="btn btn-outline">Edit Profile</button>
@@ -161,7 +166,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="post-content">🤖 Craftly Robot — Bangladesh’s First Homegrown AI... (see more)</div>
+                    <div class="post-content">ðŸ¤– Craftly Robot â€” Bangladeshâ€™s First Homegrown AI... (see more)</div>
                     <img src="https://picsum.photos/seed/robot/700/400" alt="Craftly Robot Infographic" class="post-image">
                 </article>
             </section>
@@ -191,5 +196,12 @@
             <p>&copy; 2026 Craftly Internet. Built with Craftly Robot.</p>
         </div>
     </footer>
+
+<script>
+function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('navActions').classList.toggle('open');
+}
+</script>
 </body>
 </html>
