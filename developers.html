@@ -7,77 +7,24 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .dev-hero {
-            padding: 60px 0;
-            text-align: center;
-            background: #fff;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .dev-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 40px 0;
-        }
-        .dev-card {
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 30px;
-            text-align: center;
-            transition: 0.3s;
-        }
-        .dev-card:hover {
-            border-color: #000;
-            transform: translateY(-5px);
-        }
-        .dev-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            object-fit: cover;
-            border: 1px solid #eee;
-        }
-        .dev-name {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        .dev-role {
-            font-size: 14px;
-            color: var(--secondary-text);
-            margin-bottom: 15px;
-        }
-        .dev-stats {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            font-size: 12px;
-            margin-bottom: 20px;
-        }
-        .dev-stats span b {
-            display: block;
-            font-size: 16px;
-            color: #000;
-        }
+        .coming-soon { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; text-align: center; color: #999; }
+        .coming-soon i { font-size: 52px; margin-bottom: 20px; color: #ccc; }
+        .coming-soon h2 { font-size: 24px; font-weight: 700; color: #111; margin-bottom: 10px; }
+        .coming-soon p { font-size: 15px; max-width: 380px; }
     </style>
 </head>
 <body>
     <header>
         <div class="container nav-container">
-            <div class="logo">
-                <span>Craftly Internet</span>
-            </div>
-                        <button class="hamburger" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="logo"><span>Craftly Internet</span></div>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
             </button>
             <nav class="nav-links" id="navLinks">
                 <a href="index.html">Home</a>
                 <a href="explore.html">Explore</a>
                 <a href="apps.html">Apps</a>
-                <a href="developers.html">Developers</a>
+                <a href="developers.html" style="font-weight:700; border-bottom:2px solid #000; padding-bottom:2px;">Developers</a>
             </nav>
             <div class="nav-actions" id="navActions">
                 <a href="login.html" class="btn btn-outline">Login</a>
@@ -85,77 +32,19 @@
             </div>
         </div>
     </header>
-
-    <section class="dev-hero">
-        <div class="container">
-            <h1>Meet the Builders</h1>
-            <p>Connect with the 76,000+ visionaries training the future of AI.</p>
-        </div>
-    </section>
-
     <main class="container">
-        <div class="dev-grid">
-            <!-- Dev 1 -->
-            <div class="dev-card">
-                <img src="photos/musa.png" alt="Musa" class="dev-avatar">
-                <div class="dev-name">SK Wasif Abdullah Musa</div>
-                <div class="dev-role">Founder & Visionary</div>
-                <div class="dev-stats">
-                    <span><b>15k</b> Followers</span>
-                    <span><b>42</b> Apps</span>
-                </div>
-                <a href="profile.html" class="btn btn-dark" style="display: block;">View Profile</a>
-            </div>
-
-            <!-- Dev 2 -->
-            <div class="dev-card">
-                <img src="photos/alif.png" alt="Alif" class="dev-avatar">
-                <div class="dev-name">Mahadi Islam Alif</div>
-                <div class="dev-role">Operations Engineer</div>
-                <div class="dev-stats">
-                    <span><b>1.2k</b> Followers</span>
-                    <span><b>12</b> Apps</span>
-                </div>
-                <a href="profile.html" class="btn btn-dark" style="display: block;">View Profile</a>
-            </div>
-
-            <!-- Dev 3 -->
-            <div class="dev-card">
-                <img src="https://ui-avatars.com/api/?name=Sifat+Hasan&background=eee&color=000" alt="Sifat" class="dev-avatar">
-                <div class="dev-name">Sifat Hasan</div>
-                <div class="dev-role">AI Trainer</div>
-                <div class="dev-stats">
-                    <span><b>850</b> Followers</span>
-                    <span><b>5</b> Apps</span>
-                </div>
-                <a href="#" class="btn btn-outline" style="display: block;">View Profile</a>
-            </div>
-
-            <!-- Dev 4 -->
-            <div class="dev-card">
-                <img src="https://ui-avatars.com/api/?name=Anika+Tabassum&background=eee&color=000" alt="Anika" class="dev-avatar">
-                <div class="dev-name">Anika Tabassum</div>
-                <div class="dev-role">UI/UX Designer</div>
-                <div class="dev-stats">
-                    <span><b>2.1k</b> Followers</span>
-                    <span><b>8</b> Apps</span>
-                </div>
-                <a href="#" class="btn btn-outline" style="display: block;">View Profile</a>
-            </div>
+        <div class="coming-soon">
+            <i class="fa-solid fa-code"></i>
+            <h2>Developer Hub &mdash; Coming Soon</h2>
+            <p>API documentation, SDKs, and developer tools are under construction. Meanwhile, explore our team on the <a href="explore.html" style="color:#000; font-weight:700;">Explore</a> page.</p>
+            <a href="index.html" class="btn btn-dark" style="margin-top: 25px;">&larr; Back to Feed</a>
         </div>
     </main>
-
     <footer>
         <div class="container">
             <p>&copy; 2026 Craftly Internet. Built with Craftly Robot.</p>
         </div>
     </footer>
-<script src="js/animation.js"></script>
-<script>
-function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
-    document.getElementById('navActions').classList.toggle('open');
-}
-</script>
+    <script src="js/animation.js"></script>
 </body>
 </html>
