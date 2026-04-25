@@ -3,20 +3,40 @@
 
   function initHamburger() {
     const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.getElementById("navLinks");
+    const navActions = document.getElementById("navActions");
     if (!hamburger) return;
 
     hamburger.removeAttribute("onclick");
 
-    hamburger.addEventListener("click", function () {
-      const isOpen = hamburger.classList.toggle("is-open");
+    function closeMenu() {
+      hamburger.classList.remove("is-open");
+      if (navLinks) navLinks.classList.remove("open");
+      if (navActions) navActions.classList.remove("open");
+      hamburger.setAttribute("aria-expanded", "false");
+    }
 
-      const navLinks = document.getElementById("navLinks");
-      const navActions = document.getElementById("navActions");
+    function toggleMenu(event) {
+      event.stopPropagation();
+      const isOpen = hamburger.classList.toggle("is-open");
 
       if (navLinks) navLinks.classList.toggle("open", isOpen);
       if (navActions) navActions.classList.toggle("open", isOpen);
 
       hamburger.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    hamburger.addEventListener("click", toggleMenu);
+
+    // Close menu when clicking outside
+    document.addEventListener("click", function (event) {
+      const isClickInsideHamburger = hamburger.contains(event.target);
+      const isClickInsideNavLinks = navLinks && navLinks.contains(event.target);
+      const isClickInsideNavActions = navActions && navActions.contains(event.target);
+
+      if (!isClickInsideHamburger && !isClickInsideNavLinks && !isClickInsideNavActions) {
+        closeMenu();
+      }
     });
   }
 
@@ -120,7 +140,15 @@
           header.classList.add("nav-hidden");
 
           const hamburger = document.querySelector(".hamburger.is-open");
-          if (hamburger) hamburger.click();
+          if (hamburger) {
+            // Manually close instead of clicking to avoid event issues
+            hamburger.classList.remove("is-open");
+            const navLinks = document.getElementById("navLinks");
+            const navActions = document.getElementById("navActions");
+            if (navLinks) navLinks.classList.remove("open");
+            if (navActions) navActions.classList.remove("open");
+            hamburger.setAttribute("aria-expanded", "false");
+          }
         } else {
           header.classList.remove("nav-hidden");
         }
