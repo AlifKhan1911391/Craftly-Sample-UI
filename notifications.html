@@ -6,17 +6,54 @@
     <title>Notifications | Craftly Internet</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-layout { display: grid; grid-template-columns: 260px 1fr; gap: 30px; padding: 30px 0 60px; }
+        .side-nav-card { background: #fff; border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 0; height: fit-content; position: sticky; top: 20px; }
+        .side-nav-link { display: flex; align-items: center; gap: 12px; padding: 12px 20px; font-size: 15px; font-weight: 500; color: #222; text-decoration: none; transition: 0.15s; border-left: 3px solid transparent; }
+        .side-nav-link:hover { background: #f9f9f9; }
+        .side-nav-link.active { font-weight: 700; border-left-color: #000; background: #f5f5f5; }
+        .side-nav-link i { width: 20px; text-align: center; color: #555; }
+        .side-nav-link.active i { color: #000; }
+        .page-content-card { background: #fff; border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
+        .page-content-header { padding: 22px 28px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 12px; justify-content: space-between; }
+        .page-content-header h2 { font-size: 20px; font-weight: 800; }
+        .notif-tabs { display: flex; border-bottom: 1px solid var(--border-color); }
+        .notif-tab { padding: 14px 24px; font-size: 14px; font-weight: 600; cursor: pointer; border-bottom: 3px solid transparent; color: #888; }
+        .notif-tab.active { color: #000; border-bottom-color: #000; }
+        .notif-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px 24px; border-bottom: 1px solid #f5f5f5; transition: 0.15s; cursor: pointer; }
+        .notif-item:hover { background: #fafafa; }
+        .notif-item.unread { background: #f8f8f8; }
+        .notif-item.unread:hover { background: #f2f2f2; }
+        .notif-avatar { position: relative; flex-shrink: 0; }
+        .notif-avatar img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; }
+        .notif-icon { position: absolute; bottom: -2px; right: -2px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #fff; border: 2px solid #fff; }
+        .notif-icon.like { background: #e0245e; }
+        .notif-icon.comment { background: #1da1f2; }
+        .notif-icon.follow { background: #000; }
+        .notif-icon.system { background: #666; }
+        .notif-icon.app { background: #28a745; }
+        .notif-body { flex: 1; min-width: 0; }
+        .notif-text { font-size: 14px; line-height: 1.5; color: #222; }
+        .notif-text strong { font-weight: 700; }
+        .notif-time { font-size: 12px; color: #aaa; margin-top: 3px; }
+        .notif-thumb { width: 46px; height: 46px; border-radius: 8px; object-fit: cover; flex-shrink: 0; border: 1px solid #eee; }
+        .unread-badge { width: 8px; height: 8px; background: #000; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+        .mark-all-btn { background: none; border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 14px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--font-main); }
+        .mark-all-btn:hover { background: #000; color: #fff; }
+        @media (max-width: 768px) {
+            .page-layout { grid-template-columns: 1fr; }
+            .side-nav-card { display: flex; flex-direction: row; overflow-x: auto; padding: 0; position: static; }
+            .side-nav-link { padding: 12px 16px; border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+            .side-nav-link.active { border-bottom-color: #000; border-left: none; }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container nav-container">
-            <div class="logo">
-                <span>Craftly Internet</span>
-            </div>
+            <div class="logo"><span>Craftly Internet</span></div>
             <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
             <nav class="nav-links" id="navLinks">
                 <a href="index.html">Home</a>
@@ -25,115 +62,132 @@
                 <a href="developers.html">Developers</a>
             </nav>
             <div class="nav-actions" id="navActions">
-                <a href="login.html" class="btn btn-outline">Login</a>
-                <a href="register.html" class="btn btn-dark">Join Craftly</a>
+                <a href="notifications.html" class="btn btn-outline" title="Notifications" style="background:#000;color:#fff;border-color:#000;"><i class="fa-regular fa-bell"></i></a>
+                <a href="messages.html" class="btn btn-outline" title="Messages"><i class="fa-regular fa-envelope"></i></a>
+                <a href="settings.html" class="btn btn-outline" title="Settings"><i class="fa-solid fa-gear"></i></a>
+                <a href="profile.html" class="btn btn-dark">My Profile</a>
             </div>
         </div>
     </header>
 
     <main class="container">
-        <div class="main-content">
-            <!-- Left Sidebar -->
-            <aside class="sidebar">
-                <div class="sidebar-card">
-                    <a href="profile.html" class="sidebar-link">
-                        <i class="fa-regular fa-user"></i> Profile
-                    </a>
-                    <a href="portfolio.html" class="sidebar-link">
-                        <i class="fa-solid fa-briefcase"></i> Portfolio
-                    </a>
-                    <a href="apps.html" class="sidebar-link">
-                        <i class="fa-solid fa-mobile-screen-button"></i> My Apps
-                    </a>
-                    <a href="messages.html" class="sidebar-link">
-                        <i class="fa-regular fa-envelope"></i> Messages
-                    </a>
-                    <a href="notifications.html" class="sidebar-link active" style="font-weight:700; background: #f5f5f5;">
-                        <i class="fa-regular fa-bell"></i> Notifications
-                    </a>
-                    <a href="settings.html" class="sidebar-link">
-                        <i class="fa-solid fa-gear"></i> Settings
-                    </a>
+        <div class="page-layout">
+            <nav class="side-nav-card">
+                <a href="profile.html" class="side-nav-link"><i class="fa-regular fa-user"></i> Profile</a>
+                <a href="messages.html" class="side-nav-link"><i class="fa-regular fa-envelope"></i> Messages</a>
+                <a href="notifications.html" class="side-nav-link active"><i class="fa-regular fa-bell"></i> Notifications</a>
+                <a href="settings.html" class="side-nav-link"><i class="fa-solid fa-gear"></i> Settings</a>
+                <a href="index.html" class="side-nav-link"><i class="fa-solid fa-house"></i> Back to Feed</a>
+            </nav>
+
+            <div class="page-content-card">
+                <div class="page-content-header">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <i class="fa-regular fa-bell" style="font-size:20px;"></i>
+                        <h2>Notifications</h2>
+                    </div>
+                    <button class="mark-all-btn" onclick="markAllRead()">Mark all as read</button>
                 </div>
-            </aside>
-
-            <!-- Main Content -->
-            <section class="feed">
-                <div class="post-card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <h2 style="margin: 0;">Notifications</h2>
-                        <a href="#" style="font-size: 13px; color: #666;">Mark all as read</a>
+                <div class="notif-tabs">
+                    <div class="notif-tab active" onclick="switchTab(this,'all')">All</div>
+                    <div class="notif-tab" onclick="switchTab(this,'mentions')">Mentions</div>
+                    <div class="notif-tab" onclick="switchTab(this,'follows')">Follows</div>
+                </div>
+                <div id="notifList">
+                    <div class="notif-item unread">
+                        <div class="notif-avatar">
+                            <img src="photos/musa.png" alt="Musa" onerror="this.src='https://ui-avatars.com/api/?name=SK+Musa&background=000&color=fff'">
+                            <div class="notif-icon like"><i class="fa-solid fa-heart"></i></div>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-text"><strong>SK Wasif Abdullah Musa</strong> liked your post about Craftly Robot.</div>
+                            <div class="notif-time">2 hours ago</div>
+                        </div>
+                        <img src="photos/FB_IMG_1777027614999.jpg" class="notif-thumb" alt="post">
+                        <div class="unread-badge"></div>
                     </div>
-                    
-                    <!-- Filters -->
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
-                        <button style="padding: 6px 15px; border-radius: 20px; border: none; background: #111; color: #fff; font-size: 13px; cursor: pointer;">All</button>
-                        <button style="padding: 6px 15px; border-radius: 20px; border: 1px solid #eee; background: #fff; color: #666; font-size: 13px; cursor: pointer;">Likes</button>
-                        <button style="padding: 6px 15px; border-radius: 20px; border: 1px solid #eee; background: #fff; color: #666; font-size: 13px; cursor: pointer;">Comments</button>
-                        <button style="padding: 6px 15px; border-radius: 20px; border: 1px solid #eee; background: #fff; color: #666; font-size: 13px; cursor: pointer;">Mentions</button>
+                    <div class="notif-item unread">
+                        <div class="notif-avatar">
+                            <img src="https://ui-avatars.com/api/?name=Anika+Tabassum&background=111111&color=fff" alt="Anika">
+                            <div class="notif-icon follow"><i class="fa-solid fa-user-plus"></i></div>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-text"><strong>Anika Tabassum</strong> started following you.</div>
+                            <div class="notif-time">3 hours ago</div>
+                        </div>
+                        <div class="unread-badge"></div>
                     </div>
-
-                    <div style="display: flex; flex-direction: column;">
-                        <!-- Notification 1 -->
-                        <div style="display: flex; gap: 15px; padding: 15px; border-radius: 8px; background: #f9f9f9; margin-bottom: 10px;">
-                            <div style="width: 40px; height: 40px; background: #ff4757; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff;">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div style="flex: 1;">
-                                <div style="font-size: 14px;"><span style="font-weight: 700;">Mahadi Islam Alif</span> and <span style="font-weight: 700;">12 others</span> liked your post about Craftly SDK.</div>
-                                <div style="font-size: 12px; color: #999; margin-top: 5px;">2 hours ago</div>
-                            </div>
+                    <div class="notif-item unread">
+                        <div class="notif-avatar">
+                            <img src="https://ui-avatars.com/api/?name=Nabil+Rahman&background=222222&color=fff" alt="Nabil">
+                            <div class="notif-icon comment"><i class="fa-solid fa-comment"></i></div>
                         </div>
-
-                        <!-- Notification 2 -->
-                        <div style="display: flex; gap: 15px; padding: 15px; border-radius: 8px; background: #fff; border: 1px solid #eee; margin-bottom: 10px;">
-                            <div style="width: 40px; height: 40px; background: #2f3542; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff;">
-                                <i class="fa-solid fa-comment"></i>
-                            </div>
-                            <div style="flex: 1;">
-                                <div style="font-size: 14px;"><span style="font-weight: 700;">Anika Tabassum</span> commented: "The UI looks incredibly clean! Love the typography."</div>
-                                <div style="font-size: 12px; color: #999; margin-top: 5px;">5 hours ago</div>
-                            </div>
+                        <div class="notif-body">
+                            <div class="notif-text"><strong>Nabil Rahman</strong> commented: <em>"Great work! The API performance is impressive."</em></div>
+                            <div class="notif-time">5 hours ago</div>
                         </div>
-
-                        <!-- Notification 3 -->
-                        <div style="display: flex; gap: 15px; padding: 15px; border-radius: 8px; background: #fff; border: 1px solid #eee; margin-bottom: 10px;">
-                            <div style="width: 40px; height: 40px; background: #1e90ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff;">
-                                <i class="fa-solid fa-user-plus"></i>
-                            </div>
-                            <div style="flex: 1;">
-                                <div style="font-size: 14px;"><span style="font-weight: 700;">Nabil Rahman</span> started following you.</div>
-                                <div style="font-size: 12px; color: #999; margin-top: 5px;">Yesterday</div>
-                            </div>
+                        <div class="unread-badge"></div>
+                    </div>
+                    <div class="notif-item">
+                        <div class="notif-avatar">
+                            <img src="https://ui-avatars.com/api/?name=Riya+Chowdhury&background=333333&color=fff" alt="Riya">
+                            <div class="notif-icon like"><i class="fa-solid fa-heart"></i></div>
                         </div>
-
-                        <!-- Notification 4 -->
-                        <div style="display: flex; gap: 15px; padding: 15px; border-radius: 8px; background: #fff; border: 1px solid #eee; margin-bottom: 10px;">
-                            <div style="width: 40px; height: 40px; background: #ffa502; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff;">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <div style="flex: 1;">
-                                <div style="font-size: 14px;">Your app <span style="font-weight: 700;">StudyBuddy BD</span> reached 3,000 downloads!</div>
-                                <div style="font-size: 12px; color: #999; margin-top: 5px;">2 days ago</div>
-                            </div>
+                        <div class="notif-body">
+                            <div class="notif-text"><strong>Riya Chowdhury</strong> and <strong>12 others</strong> liked your post.</div>
+                            <div class="notif-time">Yesterday</div>
+                        </div>
+                    </div>
+                    <div class="notif-item">
+                        <div class="notif-avatar">
+                            <img src="https://ui-avatars.com/api/?name=Sifat+Hasan&background=000000&color=fff" alt="Sifat">
+                            <div class="notif-icon follow"><i class="fa-solid fa-user-plus"></i></div>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-text"><strong>Sifat Hasan</strong> started following you.</div>
+                            <div class="notif-time">Yesterday</div>
+                        </div>
+                    </div>
+                    <div class="notif-item">
+                        <div class="notif-avatar">
+                            <img src="https://ui-avatars.com/api/?name=Craftly+Official&background=000&color=fff" alt="Craftly">
+                            <div class="notif-icon system"><i class="fa-solid fa-circle-info"></i></div>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-text"><strong>Craftly Internet</strong> &mdash; Your app <strong>FoodieExpress</strong> has been approved and is now live in the App Showcase.</div>
+                            <div class="notif-time">2 days ago</div>
+                        </div>
+                    </div>
+                    <div class="notif-item">
+                        <div class="notif-avatar">
+                            <img src="https://ui-avatars.com/api/?name=Craftly+Official&background=000&color=fff" alt="Craftly">
+                            <div class="notif-icon app"><i class="fa-solid fa-download"></i></div>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-text"><strong>FoodieExpress</strong> reached <strong>1,200 installs</strong>! 🎉 Congratulations.</div>
+                            <div class="notif-time">3 days ago</div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Craftly Internet. Built with Craftly Robot. From Bangladesh for the World.</p>
-            <div style="margin-top: 10px; display: flex; justify-content: center; gap: 20px;">
-                <a href="#">Privacy</a>
-                <a href="#">Terms</a>
-                <a href="#">Help</a>
-                <a href="#">About</a>
-            </div>
+            <p>&copy; 2026 Craftly Internet. Built with Craftly Robot.</p>
         </div>
     </footer>
     <script src="js/animation.js"></script>
+    <script>
+    function markAllRead() {
+        document.querySelectorAll('.notif-item.unread').forEach(function(el) { el.classList.remove('unread'); });
+        document.querySelectorAll('.unread-badge').forEach(function(el) { el.style.display = 'none'; });
+    }
+    function switchTab(el, tab) {
+        document.querySelectorAll('.notif-tab').forEach(function(t){ t.classList.remove('active'); });
+        el.classList.add('active');
+    }
+    </script>
 </body>
 </html>
