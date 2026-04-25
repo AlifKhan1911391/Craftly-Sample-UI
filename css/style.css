@@ -288,8 +288,7 @@ footer {
         display: flex;
     }
 
-    .nav-links,
-    .nav-actions {
+    .nav-links {
         display: none;
         flex-direction: column;
         align-items: flex-start;
@@ -299,9 +298,32 @@ footer {
         border-top: 1px solid var(--border-color);
     }
 
-    .nav-links.open,
-    .nav-actions.open {
+    .nav-links.open {
         display: flex;
+    }
+
+    /* Icon action buttons: always visible as compact horizontal row */
+    .nav-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+        gap: 6px;
+        margin-left: auto;
+        padding: 0;
+        border-top: none;
+        width: auto !important;
+    }
+
+    /* Compact icon-only buttons */
+    .nav-actions .btn {
+        padding: 7px 10px;
+        font-size: 14px;
+    }
+
+    /* Slightly smaller My Profile text */
+    .nav-actions .btn-dark {
+        padding: 7px 11px;
+        font-size: 12px;
     }
 
     .nav-container {
