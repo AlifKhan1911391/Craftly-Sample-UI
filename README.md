@@ -14,11 +14,11 @@ A sample front-end prototype for **Craftly Internet**, Bangladesh's developer so
 | `profile.html` | Mahadi Islam Alif's public profile |
 | `login.html` | Login page with show/hide password toggle |
 | `register.html` | Registration page with password strength indicator |
-| `portfolio.html` | Coming soon stub |
-| `messages.html` | Coming soon stub |
-| `notifications.html` | Coming soon stub |
-| `settings.html` | Coming soon stub |
-| `developers.html` | Coming soon stub |
+| `portfolio.html` | Showcase of developer portfolios with project cards and stats |
+| `messages.html` | Messaging interface with contact list and chat preview area |
+| `notifications.html` | Notification feed with filters (All, Likes, Comments, etc.) |
+| `settings.html` | User settings page with profile, security, and notification preferences |
+| `developers.html` | Developer Hub containing API documentation, SDKs, and CLI tools |
 
 ---
 
@@ -55,12 +55,13 @@ Craftly-Sample-UI/
 
 ## Features
 
-- **Feed** &#x2014; Social posts from real Craftly team members. New community posts by Anika, Nabil, Riya, and Sifat added. External post images fetched via [picsum.photos](https://picsum.photos).
+- **Feed** &#x2014; Social posts from real Craftly team members. New community posts by Anika, Nabil, Samia, and Sifat added. External post images fetched via [picsum.photos](https://picsum.photos).
 - **Explore Developers** &#x2014; Live search + skill filter. Portfolio modal shows each developer's stats, skills, and projects. Cover images fetched via picsum for developers without a local photo. "View Full Profile" only links to an actual profile page for members who have one.
 - **App Showcase** &#x2014; 8 apps across 5 categories. Category filter buttons now fully functional.
 - **Auth Pages** &#x2014; Login and Register include show/hide password toggle. Register includes a password strength indicator.
-- **Stub Pages** &#x2014; Portfolio, Messages, Notifications, Settings, and Developers all show a "Coming Soon" page so no links are broken.
-- **Responsive** &#x2014; Hamburger nav works on mobile. Profile and feed layout adapts to small screens.
+- **Developer Hub** &#x2014; Central resource for developers with API docs, SDK downloads, and CLI tool info.
+- **Portfolio & Social** &#x2014; Fully designed portfolio, messaging, and notification pages.
+- **Responsive** &#x2014; Hamburger nav works on mobile with improved logic (click outside to close). Profile and feed layout adapts to small screens.
 - **Sticky header** &#x2014; Auto-hides on scroll down, reappears on scroll up.
 
 ---
@@ -100,7 +101,7 @@ Then open [http://localhost:8000](http://localhost:8000).
 | Mahadi Islam Alif | Operations Engineer |
 | Anika Tabassum | UI/UX Designer |
 | Nabil Rahman | Backend Engineer |
-| Riya Chowdhury | Android Developer |
+| Samia Afrose | Android Developer |
 | Sifat Hasan | AI Trainer |
 
 ---
