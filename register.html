@@ -7,114 +7,98 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .auth-container {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-        .auth-card {
-            width: 100%;
-            max-width: 450px;
-            background: #fff;
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 40px;
-            text-align: center;
-        }
-        .auth-logo {
-            font-family: var(--font-logo);
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-        .auth-subtitle {
-            color: var(--secondary-text);
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-        .form-group {
-            text-align: left;
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .form-control {
-            width: 100%;
-            padding: 10px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-family: var(--font-main);
-            font-size: 14px;
-        }
-        .form-control:focus {
-            outline: none;
-            border-color: #000;
-        }
-        .auth-btn {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-        }
-        .auth-footer {
-            margin-top: 25px;
-            font-size: 14px;
-            color: var(--secondary-text);
-        }
-        .auth-footer a {
-            color: #000;
-            font-weight: 700;
-        }
+        body { display: flex; flex-direction: column; min-height: 100vh; }
+        .auth-container { flex-grow: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+        .auth-card { width: 100%; max-width: 450px; background: #fff; border: 1px solid var(--border-color); border-radius: 16px; padding: 40px; text-align: center; }
+        .auth-logo { font-family: var(--font-logo); font-size: 32px; margin-bottom: 10px; }
+        .auth-subtitle { color: var(--secondary-text); margin-bottom: 30px; font-size: 14px; }
+        .form-group { text-align: left; margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+        .input-wrap { position: relative; }
+        .form-control { width: 100%; padding: 10px 15px; border: 1px solid var(--border-color); border-radius: 8px; font-family: var(--font-main); font-size: 14px; }
+        .form-control:focus { outline: none; border-color: #000; }
+        .toggle-pw { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #999; font-size: 14px; }
+        .pw-strength { height: 4px; border-radius: 4px; margin-top: 6px; background: #eee; overflow: hidden; }
+        .pw-strength-bar { height: 100%; width: 0; border-radius: 4px; transition: width 0.3s, background 0.3s; }
+        .pw-hint { font-size: 11px; color: #999; margin-top: 4px; text-align: left; }
+        .auth-btn { width: 100%; padding: 12px; margin-top: 10px; }
+        .auth-footer { margin-top: 25px; font-size: 14px; color: var(--secondary-text); }
+        .auth-footer a { color: #000; font-weight: 700; }
     </style>
 </head>
 <body>
     <div class="auth-container">
         <div class="auth-card">
             <div class="auth-logo">Craftly</div>
-            <p class="auth-subtitle">Join the 76-day mission to build Bangladesh's AI.</p>
-            
-            <form>
+            <p class="auth-subtitle">Join the mission to build Bangladesh's AI.</p>
+
+            <div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                     <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" class="form-control" placeholder="Mahadi">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" class="form-control" placeholder="Mahadi">
                     </div>
                     <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" class="form-control" placeholder="Alif">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" class="form-control" placeholder="Alif">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" class="form-control" placeholder="alif_engineer">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-control" placeholder="alif_engineer">
                 </div>
                 <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" class="form-control" placeholder="alif@craftly.me">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="alif@craftly.me">
                 </div>
                 <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" class="form-control" placeholder="••••••••">
+                    <label for="regPassword">Password</label>
+                    <div class="input-wrap">
+                        <input type="password" id="regPassword" class="form-control" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" oninput="checkStrength(this.value)">
+                        <button class="toggle-pw" type="button" onclick="togglePw('regPassword', this)" aria-label="Show password">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="pw-strength"><div class="pw-strength-bar" id="strengthBar"></div></div>
+                    <div class="pw-hint" id="strengthHint">Use 8+ characters with letters and numbers.</div>
                 </div>
                 <p style="font-size: 11px; color: #999; margin-bottom: 20px; text-align: left;">
                     By signing up, you agree to join the collective effort to train Craftly Robot.
                 </p>
                 <a href="index.html" class="btn btn-dark auth-btn" style="display: block; text-align: center;">Create Account</a>
-            </form>
+            </div>
 
             <div class="auth-footer">
                 Already have an account? <a href="login.html">Login</a>
             </div>
         </div>
     </div>
+    <script>
+    function togglePw(fieldId, btn) {
+        var field = document.getElementById(fieldId);
+        var icon = btn.querySelector('i');
+        if (field.type === 'password') {
+            field.type = 'text';
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            field.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    }
+    function checkStrength(pw) {
+        var bar = document.getElementById('strengthBar');
+        var hint = document.getElementById('strengthHint');
+        var score = 0;
+        if (pw.length >= 8) score++;
+        if (/[A-Z]/.test(pw)) score++;
+        if (/[0-9]/.test(pw)) score++;
+        if (/[^A-Za-z0-9]/.test(pw)) score++;
+        var colors = ['#eee', '#e74c3c', '#f39c12', '#2ecc71', '#27ae60'];
+        var labels = ['', 'Too weak', 'Fair', 'Good', 'Strong'];
+        bar.style.width = (score * 25) + '%';
+        bar.style.background = colors[score];
+        hint.textContent = score === 0 ? 'Use 8+ characters with letters and numbers.' : labels[score];
+    }
+    </script>
 </body>
 </html>
