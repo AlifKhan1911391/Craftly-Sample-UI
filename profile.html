@@ -39,27 +39,11 @@
             justify-content: space-between;
             align-items: flex-end;
         }
-        .profile-name-large {
-            font-size: 28px;
-            font-weight: 800;
-        }
-        .profile-handle {
-            color: var(--secondary-text);
-            font-size: 16px;
-        }
-        .profile-bio {
-            margin-top: 15px;
-            font-size: 16px;
-            max-width: 600px;
-        }
-        .profile-stats {
-            display: flex;
-            gap: 30px;
-            margin-top: 20px;
-        }
-        .stat-item span {
-            font-weight: 700;
-        }
+        .profile-name-large { font-size: 28px; font-weight: 800; }
+        .profile-handle { color: var(--secondary-text); font-size: 16px; }
+        .profile-bio { margin-top: 15px; font-size: 16px; max-width: 600px; }
+        .profile-stats { display: flex; gap: 30px; margin-top: 20px; }
+        .stat-item span { font-weight: 700; }
         .profile-tabs {
             display: flex;
             border-bottom: 1px solid var(--border-color);
@@ -71,95 +55,31 @@
             cursor: pointer;
             border-bottom: 3px solid transparent;
         }
-        .tab-item.active {
-            border-bottom-color: var(--text-color);
-        }
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .app-card {
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-        .app-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 18px;
-            background: #000;
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 32px;
-        }
-
-        /* Profile page main content: 2-column (feed + sidebar) */
+        .tab-item.active { border-bottom-color: var(--text-color); }
         .profile-main-content {
             display: grid;
             grid-template-columns: 1fr 350px;
             gap: 30px;
         }
-
         @media (max-width: 768px) {
-            .profile-main-content {
-                grid-template-columns: 1fr;
-            }
-
-            .profile-meta {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .profile-meta > div:last-child {
-                margin-top: 10px;
-                margin-bottom: 0 !important;
-            }
-
-            .profile-name-large {
-                font-size: 22px;
-            }
-
-            .profile-handle {
-                font-size: 13px;
-            }
-
-            .profile-stats {
-                gap: 15px;
-                flex-wrap: wrap;
-            }
-
-            .tab-item {
-                padding: 12px 15px;
-                font-size: 14px;
-            }
-
-            .profile-info-section {
-                padding: 0 15px 20px;
-            }
-
-            .profile-avatar-large {
-                width: 100px;
-                height: 100px;
-                margin-top: -50px;
-            }
+            .profile-main-content { grid-template-columns: 1fr; }
+            .profile-meta { flex-direction: column; align-items: flex-start; }
+            .profile-meta > div:last-child { margin-top: 10px; margin-bottom: 0 !important; }
+            .profile-name-large { font-size: 22px; }
+            .profile-handle { font-size: 13px; }
+            .profile-stats { gap: 15px; flex-wrap: wrap; }
+            .tab-item { padding: 12px 15px; font-size: 14px; }
+            .profile-info-section { padding: 0 15px 20px; }
+            .profile-avatar-large { width: 100px; height: 100px; margin-top: -50px; }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="container nav-container">
-            <div class="logo">
-                <span>Craftly Internet</span>
-            </div>
-            <button class="hamburger" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="logo"><span>Craftly Internet</span></div>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
             </button>
             <nav class="nav-links" id="navLinks">
                 <a href="index.html">Home</a>
@@ -182,7 +102,7 @@
                     <div>
                         <img src="photos/alif.png" alt="Alif" class="profile-avatar-large">
                         <div class="profile-name-large">Mahadi Islam Alif</div>
-                        <div class="profile-handle">@alif_engineer • Engineer @ Operations</div>
+                        <div class="profile-handle">@alif_engineer &bull; Engineer @ Operations</div>
                     </div>
                     <div style="display: flex; gap: 10px; margin-bottom: 15px;">
                         <button class="btn btn-outline">Edit Profile</button>
@@ -208,20 +128,48 @@
 
         <div class="profile-main-content">
             <section class="feed">
+                <!-- Use actual avatar consistently -->
                 <article class="post-card">
                     <div class="post-header">
                         <div class="user-info">
-                            <img src="https://ui-avatars.com/api/?name=Mahadi+Islam+Alif&background=000&color=fff" alt="Alif" class="user-avatar">
+                            <img src="photos/alif.png" alt="Alif" class="user-avatar">
                             <div>
                                 <div class="user-name">Mahadi Islam Alif</div>
                                 <div class="post-time">5 hours ago</div>
                             </div>
                         </div>
+                        <i class="fa-solid fa-ellipsis"></i>
                     </div>
-                    <div class="post-content">🤖 Craftly Robot — Bangladesh's First Homegrown AI
+                    <div class="post-content">&#x1F916; Craftly Robot &mdash; Bangladesh's First Homegrown AI
 It's an AI robot that can chat with you like ChatGPT, but it can also build software like Google AI Studio or Claude. The most important part? It is completely ours. No foreign APIs, no dependence on ChatGPT, and no reliance on Google.
-Check out the infographic below to see how it works! 🚀🇧🇩</div>
+Check out the infographic below to see how it works! &#x1F680;&#x1F1E7;&#x1F1E9;</div>
                     <img src="photos/FB_IMG_1777027614999.jpg" alt="Craftly Robot Infographic" class="post-image">
+                    <div class="post-actions">
+                        <div class="action-item"><i class="fa-regular fa-heart"></i> 856</div>
+                        <div class="action-item"><i class="fa-regular fa-comment"></i> 42</div>
+                        <div class="action-item"><i class="fa-solid fa-share"></i> Share</div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-header">
+                        <div class="user-info">
+                            <img src="photos/alif.png" alt="Alif" class="user-avatar">
+                            <div>
+                                <div class="user-name">Mahadi Islam Alif</div>
+                                <div class="post-time">2 days ago</div>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </div>
+                    <div class="post-content">FoodieExpress just hit 1,200 installs! &#x1F35C; Built the entire backend in one afternoon with Craftly Robot. No prior server experience needed.
+
+If you think you can't build an app &mdash; you're wrong. Craftly makes it possible for everyone. &#x1F4AA;</div>
+                    <div class="post-actions">
+                        <div class="action-item"><i class="fa-regular fa-heart"></i> 304</div>
+                        <div class="action-item"><i class="fa-regular fa-comment"></i> 18</div>
+                        <div class="action-item"><i class="fa-solid fa-share"></i> Share</div>
+                    </div>
                 </article>
             </section>
 
@@ -239,6 +187,26 @@ Check out the infographic below to see how it works! 🚀🇧🇩</div>
                         <span style="background: #eee; padding: 4px 10px; border-radius: 20px; font-size: 12px;">AI Training</span>
                         <span style="background: #eee; padding: 4px 10px; border-radius: 20px; font-size: 12px;">UI/UX</span>
                         <span style="background: #eee; padding: 4px 10px; border-radius: 20px; font-size: 12px;">Kotlin</span>
+                        <span style="background: #eee; padding: 4px 10px; border-radius: 20px; font-size: 12px;">Research</span>
+                    </div>
+                </div>
+                <div class="sidebar-card">
+                    <h3>Apps Built</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 36px; height: 36px; background: #000; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px;"><i class="fa-solid fa-utensils"></i></div>
+                            <div>
+                                <div style="font-weight: 700; font-size: 13px;">FoodieExpress</div>
+                                <div style="font-size: 11px; color: #999;">1.2k installs &bull; 4.8 &#9733;</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 36px; height: 36px; background: #555; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px;"><i class="fa-solid fa-cloud-sun"></i></div>
+                            <div>
+                                <div style="font-weight: 700; font-size: 13px;">SkyCast BD</div>
+                                <div style="font-size: 11px; color: #999;">800 installs &bull; 4.5 &#9733;</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </aside>
@@ -250,12 +218,6 @@ Check out the infographic below to see how it works! 🚀🇧🇩</div>
             <p>&copy; 2026 Craftly Internet. Built with Craftly Robot.</p>
         </div>
     </footer>
-
-<script>
-function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
-    document.getElementById('navActions').classList.toggle('open');
-}
-</script>
+    <script src="js/animation.js"></script>
 </body>
 </html>
