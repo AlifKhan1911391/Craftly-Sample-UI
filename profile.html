@@ -88,7 +88,9 @@
                 <a href="developers.html">Developers</a>
             </nav>
             <div class="nav-actions" id="navActions">
-                <a href="messages.html" class="btn btn-outline"><i class="fa-regular fa-envelope"></i></a>
+                <a href="notifications.html" class="btn btn-outline" title="Notifications"><i class="fa-regular fa-bell"></i></a>
+                <a href="messages.html" class="btn btn-outline" title="Messages"><i class="fa-regular fa-envelope"></i></a>
+                <a href="settings.html" class="btn btn-outline" title="Settings"><i class="fa-solid fa-gear"></i></a>
                 <a href="profile.html" class="btn btn-dark">My Profile</a>
             </div>
         </div>
@@ -104,9 +106,12 @@
                         <div class="profile-name-large">Mahadi Islam Alif</div>
                         <div class="profile-handle">@alif_engineer &bull; Engineer @ Operations</div>
                     </div>
-                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                        <button class="btn btn-outline">Edit Profile</button>
-                        <button class="btn btn-dark">Share Portfolio</button>
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;" id="profileActions">
+                        <!-- Shown when visiting someone else's profile -->
+                        <button class="btn btn-dark" id="followBtn" onclick="toggleFollow()"><i class="fa-solid fa-user-plus"></i> Follow</button>
+                        <a href="messages.html" class="btn btn-outline"><i class="fa-regular fa-envelope"></i> Message</a>
+                        <!-- Shown on your own profile (hidden by default for visitor view) -->
+                        <button class="btn btn-outline" id="editBtn" style="display:none;">Edit Profile</button>
                     </div>
                 </div>
                 <div class="profile-bio">
@@ -215,9 +220,25 @@ If you think you can't build an app &mdash; you're wrong. Craftly makes it possi
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Craftly Internet. Built with Craftly Robot. From Bangladesh for the World.</p>
+            <p>&copy; 2026 Craftly Internet. Built with Craftly Robot.</p>
         </div>
     </footer>
     <script src="js/animation.js"></script>
+    <script>
+    var isFollowing = false;
+    function toggleFollow() {
+        isFollowing = !isFollowing;
+        var btn = document.getElementById('followBtn');
+        if (isFollowing) {
+            btn.innerHTML = '<i class="fa-solid fa-user-check"></i> Following';
+            btn.classList.remove('btn-dark');
+            btn.classList.add('btn-outline');
+        } else {
+            btn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Follow';
+            btn.classList.remove('btn-outline');
+            btn.classList.add('btn-dark');
+        }
+    }
+    </script>
 </body>
 </html>
