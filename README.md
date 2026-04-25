@@ -1,71 +1,24 @@
-# Craftly Internet — Sample UI
+# Craftly Internet &#x2014; Sample UI/UX
 
-> **This is a UI/UX design proposal and sample, not the live Craftly Internet platform.**
-> Built to demonstrate the look, feel, and flow of the Craftly Internet product ecosystem.
+A sample front-end prototype for **Craftly Internet**, Bangladesh's developer social platform powered by Craftly Robot &#x2014; a homegrown AI engine built to let anyone build software without foreign dependencies.
 
 ---
 
-## About Craftly
+## Pages
 
-**Craftly** is a Bangladeshi tech initiative building two connected products:
-
-| Product | What it is |
+| File | Description |
 |---|---|
-| **Craftly Robot** | An AI platform that lets developers and creators build full applications — without relying on foreign APIs like ChatGPT or Google AI. Bangladesh's own homegrown AI. |
-| **Craftly Internet** | A developer-focused social platform where apps built with Craftly Robot are published, explored, and shared with the community. Think of it as the deployment and discovery layer for Craftly Robot outputs. |
-
-Together, they form a closed loop: **build with Craftly Robot → publish on Craftly Internet.**
-
----
-
-## About This Repository
-
-This repository contains a **static HTML/CSS/JS prototype** created as a design proposal for the Craftly Internet platform. It is intended for:
-
-- Stakeholder presentations and design reviews
-- Visual reference for the actual development team
-- Demonstrating page structure, layout, and component design
-- Showcasing the brand identity and UI direction
-
-> **No backend, database, or real authentication is included.** All data shown (users, posts, apps, developers) is placeholder/sample content only.
-
----
-
-## Pages Included
-
-| File | Page |
-|---|---|
-| `index.html` | Home feed — posts, sidebar navigation, trending topics |
-| `explore.html` | Explore developers — searchable list with modals |
-| `apps.html` | App showcase — grid of apps built with Craftly Robot |
-| `developers.html` | Developer directory — profile cards |
-| `profile.html` | Individual user profile page |
-| `login.html` | Login screen |
-| `register.html` | Registration / sign-up screen |
-
----
-
-## Tech Stack
-
-This is a **pure front-end prototype** — no frameworks, no build tools.
-
-- **HTML5** — semantic page structure
-- **CSS3** — custom properties, flexbox, CSS grid, responsive design
-- **Vanilla JavaScript** — mobile menu toggle, scroll animations
-- **Font Awesome 6** — iconography
-- **Google Fonts** — Inter (body), Pacifico (logo)
-
----
-
-## Features Demonstrated
-
-- ✅ Responsive layout — adapts from desktop to mobile
-- ✅ Sticky navbar with smart scroll (hides on scroll down, reveals on scroll up)
-- ✅ Animated hamburger menu (morphs to × on open) with smooth slide-down panel
-- ✅ Developer profile modals on the Explore page
-- ✅ Post feed with like, comment, and share actions
-- ✅ App showcase grid
-- ✅ Minimal black-and-white design system with consistent spacing
+| `index.html` | Main social feed with posts from the team |
+| `explore.html` | Developer directory with search, filters, and portfolio modal |
+| `apps.html` | App showcase with working category filter |
+| `profile.html` | Mahadi Islam Alif's public profile |
+| `login.html` | Login page with show/hide password toggle |
+| `register.html` | Registration page with password strength indicator |
+| `portfolio.html` | Coming soon stub |
+| `messages.html` | Coming soon stub |
+| `notifications.html` | Coming soon stub |
+| `settings.html` | Coming soon stub |
+| `developers.html` | Coming soon stub |
 
 ---
 
@@ -73,73 +26,85 @@ This is a **pure front-end prototype** — no frameworks, no build tools.
 
 ```
 Craftly-Sample-UI/
-├── index.html
-├── explore.html
-├── apps.html
-├── developers.html
-├── profile.html
-├── login.html
-├── register.html
-├── css/
-│   └── style.css
-├── js/
-│   └── animation.js
-└── photos/
-    └── (sample images)
+&#x251C;&#x2500;&#x2500; index.html
+&#x251C;&#x2500;&#x2500; explore.html
+&#x251C;&#x2500;&#x2500; apps.html
+&#x251C;&#x2500;&#x2500; profile.html
+&#x251C;&#x2500;&#x2500; login.html
+&#x251C;&#x2500;&#x2500; register.html
+&#x251C;&#x2500;&#x2500; portfolio.html
+&#x251C;&#x2500;&#x2500; messages.html
+&#x251C;&#x2500;&#x2500; notifications.html
+&#x251C;&#x2500;&#x2500; settings.html
+&#x251C;&#x2500;&#x2500; developers.html
+&#x251C;&#x2500;&#x2500; developers.json        &#x2190; Developer data for explore page
+&#x251C;&#x2500;&#x2500; css/
+&#x2502;   &#x2514;&#x2500;&#x2500; style.css
+&#x251C;&#x2500;&#x2500; js/
+&#x2502;   &#x2514;&#x2500;&#x2500; animation.js       &#x2190; Hamburger menu + scroll behaviour
+&#x2514;&#x2500;&#x2500; photos/
+    &#x251C;&#x2500;&#x2500; musa.png
+    &#x251C;&#x2500;&#x2500; alif.png
+    &#x251C;&#x2500;&#x2500; craftly.png
+    &#x251C;&#x2500;&#x2500; 1777050519192.png
+    &#x251C;&#x2500;&#x2500; FB_IMG_1777027286578.jpg
+    &#x2514;&#x2500;&#x2500; FB_IMG_1777027614999.jpg
 ```
+
+---
+
+## Features
+
+- **Feed** &#x2014; Social posts from real Craftly team members. New community posts by Anika, Nabil, Riya, and Sifat added. External post images fetched via [picsum.photos](https://picsum.photos).
+- **Explore Developers** &#x2014; Live search + skill filter. Portfolio modal shows each developer's stats, skills, and projects. Cover images fetched via picsum for developers without a local photo. "View Full Profile" only links to an actual profile page for members who have one.
+- **App Showcase** &#x2014; 8 apps across 5 categories. Category filter buttons now fully functional.
+- **Auth Pages** &#x2014; Login and Register include show/hide password toggle. Register includes a password strength indicator.
+- **Stub Pages** &#x2014; Portfolio, Messages, Notifications, Settings, and Developers all show a "Coming Soon" page so no links are broken.
+- **Responsive** &#x2014; Hamburger nav works on mobile. Profile and feed layout adapts to small screens.
+- **Sticky header** &#x2014; Auto-hides on scroll down, reappears on scroll up.
+
+---
+
+## Tech Stack
+
+- Vanilla HTML / CSS / JavaScript &#x2014; no build step required
+- [Font Awesome 6.4](https://fontawesome.com/) for icons
+- [Google Fonts](https://fonts.google.com/) &#x2014; Pacifico (logo) + Inter (body)
+- [ui-avatars.com](https://ui-avatars.com/) for generated avatars
+- [picsum.photos](https://picsum.photos/) for placeholder post images
+- `developers.json` as a local data source for the Explore page
 
 ---
 
 ## Running Locally
 
-No installation or build step is required. Just open any HTML file in a browser:
-
-```bash
-# Clone the repository
-git clone https://github.com/your-username/Craftly-Sample-UI.git
-
-# Open in your browser
-open index.html
-```
-
-Or use a simple local server for best results:
+Open any HTML file directly in a browser, **or** serve from a local server to avoid `fetch()` CORS issues on the Explore page:
 
 ```bash
 # Python 3
 python -m http.server 8000
 
-# Then visit
-http://localhost:8000
+# Node (npx)
+npx serve .
 ```
 
----
-
-## Design Language
-
-The UI follows a **minimal, high-contrast** design philosophy:
-
-- **Colors:** Black, white, and light greys — clean and professional
-- **Typography:** Inter for readability at all weights; Pacifico for the logo wordmark
-- **Components:** Cards with subtle borders and hover states, pill-shaped buttons, rounded avatars
-- **Motion:** Smooth cubic-bezier transitions throughout — no jarring snaps
+Then open [http://localhost:8000](http://localhost:8000).
 
 ---
 
-## Status
+## Team
 
-| | |
+| Name | Role |
 |---|---|
-| **Type** | Design Proposal / Sample UI |
-| **Stage** | Prototype (static, no backend) |
-| **Live Product** | Not deployed — for reference only |
-| **Origin** | Bangladesh 🇧🇩 |
+| SK Wasif Abdullah Musa | Founder & Visionary |
+| Mahadi Islam Alif | Operations Engineer |
+| Anika Tabassum | UI/UX Designer |
+| Nabil Rahman | Backend Engineer |
+| Riya Chowdhury | Android Developer |
+| Sifat Hasan | AI Trainer |
 
 ---
 
-## Disclaimer
+> **Note:** This is a sample/demo UI only. All data is fake, all forms are non-functional, and no backend exists. Built to showcase the Craftly Internet concept for the National Science and Technology Week.
 
-This is a **sample UI for proposal purposes only.** The Craftly Internet platform shown here is a design concept. All names, posts, follower counts, and app listings displayed are fictional placeholder data created for demonstration.
-
----
-
-*Built with ❤️ by Team Craftly — From Bangladesh, for the World.*
+&copy; 2026 Craftly Internet. Built with Craftly Robot. From Bangladesh for the World.
