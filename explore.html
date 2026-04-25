@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explore Developers | Craftly Internet</title>
+    <title>Explore People | Craftly Internet</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -17,59 +17,52 @@
         .filter-bar::-webkit-scrollbar { display: none; }
         .filter-btn { padding: 7px 18px; border-radius: 20px; border: 1px solid var(--border-color); background: #fff; font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: 0.2s; font-family: var(--font-main); }
         .filter-btn.active, .filter-btn:hover { background: #000; color: #fff; border-color: #000; }
-        .dev-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; margin-bottom: 60px; }
-        .dev-row { display: grid; grid-template-columns: 60px 1fr auto; align-items: center; gap: 16px; padding: 18px 20px; background: #fff; border: 1px solid var(--border-color); border-radius: 12px; cursor: pointer; transition: 0.2s; }
-        .dev-row:hover { border-color: #000; box-shadow: 0 4px 16px rgba(0,0,0,0.07); transform: translateY(-1px); }
-        .dev-row-avatar { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 1px solid #eee; }
-        .dev-row-info h3 { font-size: 16px; font-weight: 700; margin-bottom: 3px; }
-        .dev-row-info .handle { font-size: 12px; color: var(--secondary-text); margin-bottom: 5px; }
-        .dev-row-info .role-badge { display: inline-block; padding: 2px 10px; border-radius: 20px; background: #f2f2f2; font-size: 11px; font-weight: 600; color: #444; }
-        .dev-row-info .bio-short { font-size: 13px; color: #555; margin-top: 6px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .dev-row-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; min-width: 80px; }
-        .dev-row-meta .followers { font-size: 13px; font-weight: 700; }
-        .dev-row-meta .followers span { font-size: 11px; font-weight: 400; color: #999; display: block; }
-        .dev-row-meta .apps-count { font-size: 11px; color: var(--secondary-text); }
-        .dev-row-meta .view-btn { padding: 5px 14px; background: #000; color: #fff; border-radius: 20px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; white-space: nowrap; }
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
-        .skill-tag { padding: 2px 8px; background: #000; color: #fff; border-radius: 4px; font-size: 10px; font-weight: 600; }
+        .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-top: 10px; margin-bottom: 60px; }
+        .person-card { background: #fff; border: 1px solid var(--border-color); border-radius: 14px; overflow: hidden; transition: 0.2s; cursor: pointer; }
+        .person-card:hover { border-color: #000; box-shadow: 0 6px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
+        .person-cover { height: 80px; background: linear-gradient(135deg, #111 0%, #444 100%); }
+        .person-card-body { padding: 0 18px 18px; }
+        .person-avatar-wrap { margin-top: -36px; margin-bottom: 10px; }
+        .person-avatar { width: 72px; height: 72px; border-radius: 50%; border: 4px solid #fff; object-fit: cover; display: block; }
+        .person-name { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+        .person-handle { font-size: 12px; color: #888; margin-bottom: 6px; }
+        .person-bio { font-size: 13px; color: #555; line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .person-interest-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+        .person-tag { padding: 2px 8px; background: #f2f2f2; border-radius: 4px; font-size: 11px; color: #555; }
+        .person-card-footer { display: flex; align-items: center; justify-content: space-between; }
+        .person-followers { font-size: 12px; color: #888; }
+        .person-followers strong { color: #222; }
+        .follow-btn { padding: 6px 18px; background: #000; color: #fff; border: none; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: var(--font-main); transition: 0.2s; }
+        .follow-btn.following { background: #fff; color: #000; border: 1px solid #000; }
+        .follow-btn:hover { opacity: 0.85; }
         .state-box { text-align: center; padding: 60px 20px; color: #999; }
         .state-box i { font-size: 40px; margin-bottom: 15px; display: block; }
-        .no-results { display: none; }
+        .section-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin: 28px 0 12px; }
 
-        /* Modal */
+        /* Profile modal */
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 9000; align-items: flex-start; justify-content: center; padding: 30px 15px; overflow-y: auto; }
         .modal-overlay.open { display: flex; }
-        .portfolio-modal { background: #fff; border-radius: 20px; max-width: 720px; width: 100%; overflow: hidden; position: relative; margin: auto; animation: slideUp 0.25s ease; }
+        .profile-modal { background: #fff; border-radius: 20px; max-width: 560px; width: 100%; overflow: hidden; position: relative; margin: auto; animation: slideUp 0.25s ease; }
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .modal-close { position: absolute; top: 16px; right: 20px; background: rgba(0,0,0,0.12); border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: 0.2s; }
         .modal-close:hover { background: #000; color: #fff; }
-        .portfolio-cover { height: 160px; background: linear-gradient(135deg, #000 0%, #333 100%); position: relative; overflow: hidden; }
-        .portfolio-cover img.cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-        .portfolio-cover-pattern { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 22px 22px; }
-        .portfolio-body { padding: 0 30px 30px; }
-        .portfolio-avatar-wrap { margin-top: -50px; margin-bottom: 14px; position: relative; z-index: 2; }
-        .portfolio-avatar { width: 100px; height: 100px; border-radius: 50%; border: 4px solid #fff; object-fit: cover; display: block; }
-        .portfolio-name { font-size: 26px; font-weight: 800; margin-bottom: 2px; }
-        .portfolio-handle { color: #888; font-size: 14px; margin-bottom: 10px; }
-        .portfolio-role-badge { display: inline-block; padding: 3px 12px; background: #000; color: #fff; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 14px; }
-        .portfolio-bio { font-size: 15px; line-height: 1.6; color: #444; margin-bottom: 18px; }
-        .portfolio-stats { display: flex; gap: 24px; padding: 16px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin-bottom: 24px; }
-        .portfolio-stat { text-align: center; }
-        .portfolio-stat .num { font-size: 22px; font-weight: 800; }
-        .portfolio-stat .lbl { font-size: 11px; color: #999; margin-top: 2px; }
-        .portfolio-section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin: 20px 0 12px; }
-        .portfolio-skills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
-        .portfolio-skill { padding: 5px 14px; background: #f2f2f2; border-radius: 20px; font-size: 13px; font-weight: 500; }
-        .project-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; margin-bottom: 4px; }
-        .project-card { border: 1px solid #eee; border-radius: 12px; padding: 16px; }
-        .project-icon { width: 48px; height: 48px; border-radius: 12px; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 12px; }
-        .project-name { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
-        .project-desc { font-size: 12px; color: #666; margin-bottom: 10px; line-height: 1.5; }
-        .project-meta { font-size: 11px; color: #999; display: flex; gap: 10px; }
-        .featured-post { background: #f9f9f9; border-radius: 12px; padding: 16px; font-size: 14px; line-height: 1.6; color: #333; border-left: 3px solid #000; margin-top: 4px; }
-        .portfolio-actions { display: flex; gap: 12px; margin-top: 24px; }
-        .portfolio-actions .btn { flex: 1; text-align: center; }
-        @media (max-width: 600px) { .dev-row { grid-template-columns: 50px 1fr; } .dev-row-meta { display: none; } .explore-hero h1 { font-size: 26px; } }
+        .modal-cover { height: 130px; background: linear-gradient(135deg, #000, #444); }
+        .modal-body { padding: 0 26px 26px; }
+        .modal-avatar-wrap { margin-top: -44px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .modal-avatar { width: 88px; height: 88px; border-radius: 50%; border: 4px solid #fff; object-fit: cover; }
+        .modal-action-btns { display: flex; gap: 8px; padding-bottom: 6px; }
+        .modal-name { font-size: 22px; font-weight: 800; }
+        .modal-handle { color: #888; font-size: 14px; margin-bottom: 8px; }
+        .modal-bio-text { font-size: 14px; line-height: 1.6; color: #444; margin-bottom: 14px; }
+        .modal-stats { display: flex; gap: 20px; margin-bottom: 16px; }
+        .modal-stat .num { font-size: 18px; font-weight: 800; }
+        .modal-stat .lbl { font-size: 11px; color: #999; }
+        .modal-interests { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+        .modal-interest { padding: 5px 14px; background: #f2f2f2; border-radius: 20px; font-size: 13px; }
+        .recent-posts-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #aaa; margin-bottom: 10px; }
+        .mini-post { background: #f9f9f9; border-radius: 10px; padding: 12px; font-size: 13px; line-height: 1.5; color: #333; border-left: 2px solid #000; margin-bottom: 8px; }
+
+        @media (max-width: 600px) { .people-grid { grid-template-columns: 1fr; } .explore-hero h1 { font-size: 26px; } }
     </style>
 </head>
 <body>
@@ -87,41 +80,41 @@
             <a href="developers.html">Developers</a>
         </nav>
         <div class="nav-actions" id="navActions">
-            <a href="login.html" class="btn btn-outline">Login</a>
-            <a href="register.html" class="btn btn-dark">Join Craftly</a>
+            <a href="notifications.html" class="btn btn-outline" title="Notifications"><i class="fa-regular fa-bell"></i></a>
+            <a href="messages.html" class="btn btn-outline" title="Messages"><i class="fa-regular fa-envelope"></i></a>
+            <a href="settings.html" class="btn btn-outline" title="Settings"><i class="fa-solid fa-gear"></i></a>
+            <a href="profile.html" class="btn btn-dark">My Profile</a>
         </div>
     </div>
 </header>
 
 <section class="explore-hero">
     <div class="container">
-        <h1>Explore Developers</h1>
-        <p>Find talented builders from Bangladesh and beyond who are shaping the future of AI.</p>
+        <h1>Explore People</h1>
+        <p>Find creators, developers, designers and thinkers building the future. Follow &amp; connect with anyone.</p>
         <div class="search-wrap">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" class="explore-search" id="devSearch" placeholder="Search by name, skill, or role&hellip;">
+            <input type="text" class="explore-search" id="peopleSearch" placeholder="Search by name, interest, or location&hellip;">
         </div>
     </div>
 </section>
 
 <main class="container">
     <div class="filter-bar" id="filterBar">
-        <button class="filter-btn active" data-skill="all">All Developers</button>
-        <button class="filter-btn" data-skill="Android">Android</button>
-        <button class="filter-btn" data-skill="AI">AI / ML</button>
-        <button class="filter-btn" data-skill="UI">UI / UX</button>
-        <button class="filter-btn" data-skill="Backend">Backend</button>
-        <button class="filter-btn" data-skill="Kotlin">Kotlin</button>
+        <button class="filter-btn active" data-cat="all">Everyone</button>
+        <button class="filter-btn" data-cat="Developer">Developers</button>
+        <button class="filter-btn" data-cat="Designer">Designers</button>
+        <button class="filter-btn" data-cat="Student">Students</button>
+        <button class="filter-btn" data-cat="Creator">Creators</button>
+        <button class="filter-btn" data-cat="Entrepreneur">Entrepreneurs</button>
     </div>
-    <div id="devList" class="dev-list">
-        <div class="state-box">
+
+    <div class="section-label">Suggested for you</div>
+    <div class="people-grid" id="peopleGrid">
+        <div class="state-box" style="grid-column:1/-1;">
             <i class="fa-solid fa-circle-notch fa-spin"></i>
-            <p>Loading developers&hellip;</p>
+            <p>Loading people&hellip;</p>
         </div>
-    </div>
-    <div class="no-results state-box" id="noResults">
-        <i class="fa-solid fa-user-slash"></i>
-        <p>No developers match your search.</p>
     </div>
 </main>
 
@@ -131,65 +124,134 @@
     </div>
 </footer>
 
-<div class="modal-overlay" id="portfolioModal">
-    <div class="portfolio-modal" id="portfolioContent"></div>
+<div class="modal-overlay" id="profileModal">
+    <div class="profile-modal" id="profileModalContent"></div>
 </div>
 
 <script src="js/animation.js"></script>
 <script>
-let allDevs = [];
-let activeFilter = 'all';
-let searchQuery = '';
+var people = [
+    { id: 'musa', name: 'SK Wasif Abdullah Musa', handle: '@musa_craftly', cat: 'Entrepreneur', location: 'Chittagong, BD', avatar: 'photos/musa.png', bio: 'Founder of Craftly Internet. Building Bangladesh\'s first homegrown AI ecosystem. Science fair champion 🏆', interests: ['AI', 'Leadership', 'Startups', 'Technology'], followers: '3.4k', following: '210', posts: '89', featured: 'Alhamdulillah, our Team Craftly has secured 3rd place in the District Level of National Science and Technology Week!' },
+    { id: 'alif', name: 'Mahadi Islam Alif', handle: '@alif_engineer', cat: 'Developer', location: 'Chittagong, BD', avatar: 'photos/alif.png', bio: 'Engineer @ Operations, Craftly. Android developer & AI trainer. Building the future of AI in Bangladesh.', interests: ['Android', 'AI Training', 'Kotlin', 'UI/UX'], followers: '1.2k', following: '450', posts: '54', featured: '🤖 Craftly Robot — Bangladesh\'s First Homegrown AI. No foreign APIs, no dependence on ChatGPT.' },
+    { id: 'anika', name: 'Anika Tabassum', handle: '@anika_designs', cat: 'Designer', location: 'Dhaka, BD', avatar: null, bio: 'UI/UX Designer @ Craftly. Just launched the Craftly Internet Design System — 120 components, fully accessible.', interests: ['UI/UX', 'Design Systems', 'Accessibility', 'Figma'], followers: '2.1k', following: '380', posts: '72', featured: '🎨 Just launched the Craftly Internet Design System — 120 components, fully accessible, built for low-bandwidth users.' },
+    { id: 'nabil', name: 'Nabil Rahman', handle: '@nabil_backend', cat: 'Developer', location: 'Dhaka, BD', avatar: null, bio: 'Backend Engineer. Built the infrastructure that handled 50k API requests/min. No AWS, pure homegrown tech.', interests: ['Backend', 'Infrastructure', 'APIs', 'Performance'], followers: '980', following: '290', posts: '41', featured: '🔥 Craftly API just handled 50,000 requests in a single minute. Zero downtime. Pure homegrown infrastructure.' },
+    { id: 'riya', name: 'Riya Chowdhury', handle: '@riya_android', cat: 'Developer', location: 'Sylhet, BD', avatar: null, bio: 'Android Developer. Built StudyBuddy BD — 3k downloads in one weekend using Craftly Robot. Believer in no-code for all.', interests: ['Android', 'Education', 'No-Code', 'Bangla AI'], followers: '760', following: '190', posts: '28', featured: '📚 StudyBuddy BD just crossed 3,000 downloads! Built it in one weekend using Craftly Robot.' },
+    { id: 'sifat', name: 'Sifat Hasan', handle: '@sifat_ai', cat: 'Developer', location: 'Chittagong, BD', avatar: null, bio: 'AI Trainer. Annotated 200k Bangla sentences for Craftly Robot training. Making AI speak Bangla natively.', interests: ['AI Training', 'Bangla NLP', 'Research', 'Data'], followers: '640', following: '155', posts: '33', featured: 'Just finished annotating 200,000 Bangla sentences for the Craftly Robot training pipeline. #BanglaAI' },
+    { id: 'tanvir', name: 'Tanvir Ahmed', handle: '@tanvir_creates', cat: 'Creator', location: 'Rajshahi, BD', avatar: null, bio: 'Tech content creator & blogger. Sharing how everyday people can use Craftly to build apps without coding.', interests: ['Content Creation', 'No-Code', 'YouTube', 'Tech Education'], followers: '5.2k', following: '820', posts: '144', featured: 'You don\'t need to be a programmer to build apps anymore. Craftly Robot changed everything for us 🙌' },
+    { id: 'zara', name: 'Zara Islam', handle: '@zara_student', cat: 'Student', location: 'Dhaka, BD', avatar: null, bio: 'CS student at BUET. Side project: KitchenHelper BD, a meal planner app built with Craftly Robot. Love to learn!', interests: ['Computer Science', 'App Development', 'BUET', 'Food Tech'], followers: '310', following: '490', posts: '17', featured: 'As a CS student I always thought building a real app would take months. Craftly Robot helped me ship in 3 days!' },
+    { id: 'farhan', name: 'Farhan Hossain', handle: '@farhan_biz', cat: 'Entrepreneur', location: 'Khulna, BD', avatar: null, bio: 'E-commerce entrepreneur. Used Craftly to launch QuickShop BD — my first mobile app with 500+ daily users.', interests: ['E-Commerce', 'Entrepreneurship', 'Mobile', 'Retail'], followers: '890', following: '340', posts: '38', featured: 'Launched QuickShop BD on Craftly App Store. Built by me, a non-developer, using Craftly Robot in 5 days! 🚀' },
+    { id: 'priya', name: 'Priya Sen', handle: '@priya_ux', cat: 'Designer', location: 'Chittagong, BD', avatar: null, bio: 'Freelance UX researcher and product designer. Helping Craftly teams run user research across rural Bangladesh.', interests: ['UX Research', 'Product Design', 'Rural Tech', 'Human-Centered'], followers: '430', following: '200', posts: '22', featured: 'Did user interviews in 3 villages this week. The biggest insight: people want tech that speaks their language first.' },
+    { id: 'arif', name: 'Arif Billah', handle: '@arif_motion', cat: 'Creator', location: 'Mymensingh, BD', avatar: null, bio: 'Motion graphic designer & video producer. Making Craftly stories come alive through animation and visual storytelling.', interests: ['Motion Graphics', 'Video', 'Animation', 'Storytelling'], followers: '1.7k', following: '560', posts: '95', featured: 'Every great product needs great storytelling. Proud to help tell the Craftly story through motion and design 🎬' },
+    { id: 'mim', name: 'Mim Akter', handle: '@mim_learns', cat: 'Student', location: 'Comilla, BD', avatar: null, bio: 'High school student learning to code with Craftly. Built a school event app as my first project. Dream: software engineer.', interests: ['Learning', 'School Projects', 'Web Dev', 'Dreams Big'], followers: '120', following: '340', posts: '9', featured: 'I\'m 17 and I just deployed my first app. If I can do it, YOU can do it. Don\'t stop learning 💪' },
+];
 
-async function loadDevelopers() {
-    try {
-        const res = await fetch('developers.json');
-        if (!res.ok) throw new Error('Network error');
-        allDevs = await res.json();
-        renderList();
-    } catch (err) {
-        document.getElementById('devList').innerHTML = '<div class="state-box"><i class="fa-solid fa-triangle-exclamation"></i><p>Could not load developers.json &mdash; make sure it is in the project root.</p></div>';
-    }
-}
+var activeFilter = 'all';
+var searchQuery = '';
+var followed = {};
 
 function avatarUrl(name) {
     return 'https://ui-avatars.com/api/?name=' + encodeURIComponent(name) + '&background=000&color=fff&size=200';
 }
 
-function renderList() {
-    const list = document.getElementById('devList');
-    const noResults = document.getElementById('noResults');
-    const q = searchQuery.toLowerCase();
-    const filtered = allDevs.filter(function(dev) {
-        const matchSearch = !q || dev.name.toLowerCase().includes(q) || dev.role.toLowerCase().includes(q) || (dev.skills||[]).some(function(s){ return s.toLowerCase().includes(q); });
-        const matchFilter = activeFilter === 'all' || (dev.skills||[]).some(function(s){ return s.toLowerCase().includes(activeFilter.toLowerCase()); });
-        return matchSearch && matchFilter;
+function coverGradient(id) {
+    var gradients = {
+        musa: 'linear-gradient(135deg,#000 0%,#333 100%)',
+        alif: 'linear-gradient(135deg,#111 0%,#445 100%)',
+        anika: 'linear-gradient(135deg,#1a1a2e 0%,#555 100%)',
+        nabil: 'linear-gradient(135deg,#0a0a0a 0%,#4a4a4a 100%)',
+        riya: 'linear-gradient(135deg,#1b1b1b 0%,#3a5 100%)',
+        sifat: 'linear-gradient(135deg,#000 0%,#266 100%)',
+        tanvir: 'linear-gradient(135deg,#111 0%,#600 100%)',
+        zara: 'linear-gradient(135deg,#222 0%,#559 100%)',
+        farhan: 'linear-gradient(135deg,#111 0%,#740 100%)',
+        priya: 'linear-gradient(135deg,#000 0%,#455 100%)',
+        arif: 'linear-gradient(135deg,#0d0d0d 0%,#633 100%)',
+        mim: 'linear-gradient(135deg,#111 0%,#446 100%)',
+    };
+    return gradients[id] || 'linear-gradient(135deg,#000 0%,#444 100%)';
+}
+
+function renderPeople() {
+    var grid = document.getElementById('peopleGrid');
+    var q = searchQuery.toLowerCase();
+    var filtered = people.filter(function(p) {
+        var matchCat = activeFilter === 'all' || p.cat === activeFilter;
+        var matchSearch = !q || p.name.toLowerCase().includes(q) || p.handle.toLowerCase().includes(q) || p.bio.toLowerCase().includes(q) || p.interests.some(function(i){ return i.toLowerCase().includes(q); }) || p.location.toLowerCase().includes(q);
+        return matchCat && matchSearch;
     });
     if (!filtered.length) {
-        list.innerHTML = '';
-        noResults.style.display = 'block';
+        grid.innerHTML = '<div class="state-box" style="grid-column:1/-1;"><i class="fa-solid fa-user-slash"></i><p>No people found. Try a different search.</p></div>';
         return;
     }
-    noResults.style.display = 'none';
-    list.innerHTML = filtered.map(function(dev) {
-        const src = dev.avatar || avatarUrl(dev.name);
-        const fallback = avatarUrl(dev.name);
-        const skills = (dev.skills||[]).slice(0,4).map(function(s){ return '<span class="skill-tag">'+s+'</span>'; }).join('');
-        return '<div class="dev-row" onclick="openPortfolio(\''+dev.id+'\')">'
-            + '<img src="'+src+'" alt="'+dev.name+'" class="dev-row-avatar" onerror="this.src=\''+fallback+'\'">'
-            + '<div class="dev-row-info">'
-            + '<h3>'+dev.name+'</h3>'
-            + '<div class="handle">'+dev.handle+'</div>'
-            + '<span class="role-badge">'+dev.role+'</span>'
-            + '<p class="bio-short">'+dev.bio+'</p>'
-            + '<div class="skill-tags">'+skills+'</div>'
-            + '</div>'
-            + '<div class="dev-row-meta">'
-            + '<div class="followers">'+dev.followers+'<span>followers</span></div>'
-            + '<div class="apps-count"><i class="fa-solid fa-mobile-screen"></i> '+dev.apps+' apps</div>'
-            + '<button class="view-btn">View Portfolio</button>'
-            + '</div></div>';
+    grid.innerHTML = filtered.map(function(p) {
+        var src = p.avatar || avatarUrl(p.name);
+        var tags = p.interests.slice(0,3).map(function(i){ return '<span class="person-tag">'+i+'</span>'; }).join('');
+        var isFollowing = followed[p.id];
+        return '<div class="person-card" onclick="openProfileModal(\''+p.id+'\')">'
+            + '<div class="person-cover" style="background:'+coverGradient(p.id)+'"></div>'
+            + '<div class="person-card-body">'
+            + '<div class="person-avatar-wrap"><img src="'+src+'" class="person-avatar" alt="'+p.name+'" onerror="this.src=\''+avatarUrl(p.name)+'\'"></div>'
+            + '<div class="person-name">'+p.name+'</div>'
+            + '<div class="person-handle">'+p.handle+' &bull; '+p.location+'</div>'
+            + '<div class="person-bio">'+p.bio+'</div>'
+            + '<div class="person-interest-tags">'+tags+'</div>'
+            + '<div class="person-card-footer">'
+            + '<div class="person-followers"><strong>'+p.followers+'</strong> followers</div>'
+            + '<button class="follow-btn'+(isFollowing?' following':'')+'" onclick="toggleFollow(event,\''+p.id+'\')">'+( isFollowing ? '✓ Following' : 'Follow')+'</button>'
+            + '</div></div></div>';
     }).join('');
+}
+
+function toggleFollow(e, id) {
+    e.stopPropagation();
+    followed[id] = !followed[id];
+    renderPeople();
+}
+
+function openProfileModal(id) {
+    var p = people.find(function(x){ return x.id === id; });
+    if (!p) return;
+    var src = p.avatar || avatarUrl(p.name);
+    var isFollowing = followed[p.id];
+    var tags = p.interests.map(function(i){ return '<span class="modal-interest">'+i+'</span>'; }).join('');
+    document.getElementById('profileModalContent').innerHTML =
+        '<button class="modal-close" onclick="closeProfileModal()"><i class="fa-solid fa-xmark"></i></button>'
+        + '<div class="modal-cover" style="background:'+coverGradient(p.id)+'"></div>'
+        + '<div class="modal-body">'
+        + '<div class="modal-avatar-wrap">'
+        + '<img src="'+src+'" class="modal-avatar" alt="'+p.name+'" onerror="this.src=\''+avatarUrl(p.name)+'\'">'
+        + '<div class="modal-action-btns">'
+        + '<button class="btn btn-outline" style="padding:7px 16px;font-size:13px;" onclick="window.location=\'messages.html\'"><i class="fa-regular fa-envelope"></i> Message</button>'
+        + '<button class="follow-btn'+(isFollowing?' following':'')+'" style="padding:8px 20px;font-size:13px;" onclick="toggleFollow(event,\''+p.id+'\');updateModalFollow(\''+p.id+'\')">'+( isFollowing ? '✓ Following' : 'Follow')+'</button>'
+        + '</div></div>'
+        + '<div class="modal-name">'+p.name+'</div>'
+        + '<div class="modal-handle">'+p.handle+' &nbsp;&middot;&nbsp; <i class="fa-solid fa-location-dot"></i> '+p.location+'</div>'
+        + '<div class="modal-bio-text">'+p.bio+'</div>'
+        + '<div class="modal-stats">'
+        + '<div class="modal-stat"><div class="num">'+p.followers+'</div><div class="lbl">Followers</div></div>'
+        + '<div class="modal-stat"><div class="num">'+p.following+'</div><div class="lbl">Following</div></div>'
+        + '<div class="modal-stat"><div class="num">'+p.posts+'</div><div class="lbl">Posts</div></div>'
+        + '</div>'
+        + '<div class="modal-interests">'+tags+'</div>'
+        + '<div class="recent-posts-title">Featured Post</div>'
+        + '<div class="mini-post">'+p.featured+'</div>'
+        + '</div>';
+    document.getElementById('profileModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function updateModalFollow(id) {
+    var isFollowing = followed[id];
+    var btn = document.querySelector('.modal-action-btns .follow-btn');
+    if (btn) {
+        btn.textContent = isFollowing ? '✓ Following' : 'Follow';
+        btn.className = 'follow-btn' + (isFollowing ? ' following' : '');
+    }
+}
+
+function closeProfileModal() {
+    document.getElementById('profileModal').classList.remove('open');
+    document.body.style.overflow = '';
 }
 
 document.getElementById('filterBar').addEventListener('click', function(e) {
@@ -197,71 +259,21 @@ document.getElementById('filterBar').addEventListener('click', function(e) {
     if (!btn) return;
     document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
     btn.classList.add('active');
-    activeFilter = btn.dataset.skill;
-    renderList();
+    activeFilter = btn.dataset.cat;
+    renderPeople();
 });
 
-document.getElementById('devSearch').addEventListener('input', function(e) {
+document.getElementById('peopleSearch').addEventListener('input', function(e) {
     searchQuery = e.target.value;
-    renderList();
+    renderPeople();
 });
 
-function openPortfolio(id) {
-    var dev = allDevs.find(function(d){ return d.id === id; });
-    if (!dev) return;
-    var src = dev.avatar || avatarUrl(dev.name);
-    var fb = avatarUrl(dev.name);
-    var projects = (dev.projects||[]).map(function(p){
-        return '<div class="project-card">'
-            + '<div class="project-icon"><i class="fa-solid '+p.icon+'"></i></div>'
-            + '<div class="project-name">'+p.name+'</div>'
-            + '<div class="project-desc">'+p.desc+'</div>'
-            + '<div class="project-meta"><span><i class="fa-solid fa-download"></i> '+p.installs+'</span><span><i class="fa-solid fa-star"></i> '+p.rating+'</span></div>'
-            + '</div>';
-    }).join('');
-    var skills = (dev.skills||[]).map(function(s){ return '<span class="portfolio-skill">'+s+'</span>'; }).join('');
-    // Profile link: only Alif & Musa have real profile pages in this sample
-    var profileHref = (dev.id === 'alif' || dev.id === 'musa') ? 'profile.html' : '#';
-    var coverSrc = dev.cover && !dev.cover.startsWith('cover') ? dev.cover : 'https://picsum.photos/seed/craftly-'+dev.id+'/720/160';
-    document.getElementById('portfolioContent').innerHTML =
-        '<button class="modal-close" onclick="closePortfolio()"><i class="fa-solid fa-xmark"></i></button>'
-        + '<div class="portfolio-cover"><img class="cover-img" src="' + coverSrc + '" onerror="this.onerror=null;this.src=\'https://picsum.photos/seed/'+dev.id+'/720/160\'" alt="cover"><div class="portfolio-cover-pattern"></div></div>'
-        + '<div class="portfolio-body">'
-        + '<div class="portfolio-avatar-wrap"><img src="'+src+'" alt="'+dev.name+'" class="portfolio-avatar" onerror="this.src=\''+fb+'\'"></div>'
-        + '<div class="portfolio-name">'+dev.name+'</div>'
-        + '<div class="portfolio-handle">'+dev.handle+' &nbsp;&middot;&nbsp; <i class="fa-solid fa-location-dot"></i> '+dev.location+'</div>'
-        + '<span class="portfolio-role-badge">'+dev.role+'</span>'
-        + '<p class="portfolio-bio">'+dev.bio+'</p>'
-        + '<div class="portfolio-stats">'
-        + '<div class="portfolio-stat"><div class="num">'+dev.followers+'</div><div class="lbl">Followers</div></div>'
-        + '<div class="portfolio-stat"><div class="num">'+dev.apps+'</div><div class="lbl">Apps Built</div></div>'
-        + '<div class="portfolio-stat"><div class="num">'+((dev.skills||[]).length)+'</div><div class="lbl">Skills</div></div>'
-        + '</div>'
-        + '<div class="portfolio-section-title">Skills</div>'
-        + '<div class="portfolio-skills">'+skills+'</div>'
-        + '<div class="portfolio-section-title">Projects</div>'
-        + '<div class="project-cards">'+projects+'</div>'
-        + '<div class="portfolio-section-title">Featured Post</div>'
-        + '<div class="featured-post">'+dev.featured_post+'</div>'
-        + '<div class="portfolio-actions">'
-        + '<a href="'+profileHref+'" class="btn btn-dark">View Full Profile</a>'
-        + '<button class="btn btn-outline" onclick="closePortfolio()">Close</button>'
-        + '</div></div>';
-    document.getElementById('portfolioModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
-
-function closePortfolio() {
-    document.getElementById('portfolioModal').classList.remove('open');
-    document.body.style.overflow = '';
-}
-
-document.getElementById('portfolioModal').addEventListener('click', function(e) {
-    if (e.target === document.getElementById('portfolioModal')) closePortfolio();
+document.getElementById('profileModal').addEventListener('click', function(e) {
+    if (e.target === document.getElementById('profileModal')) closeProfileModal();
 });
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePortfolio(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeProfileModal(); });
 
-loadDevelopers();
+renderPeople();
 </script>
 </body>
 </html>
